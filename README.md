@@ -10,7 +10,7 @@ This project is a boilerplate for building React applications with Vite. It incl
 
 To get started with this project, you'll need to have [Node.js](https://nodejs.org/) installed on your machine. Once you have Node.js installed, you can follow these steps:
 
-1.  Clone the repository: `git clone https://github.com/your-username/vite-react.git`
+1.  Clone the repository: `git clone https://github.com/laura1809/par-kud.git`
 2.  Change into the project directory: `cd vite-react`
 3.  Install dependencies: `npm install`
 4.  Start the development server: `npm run dev`
