@@ -7,9 +7,10 @@ export default {
   theme: {
     extend: {
       colors:{
-        'yellow': '#ebac25',
+        'yellow': '#FFE925',
         'blue': '#2563EB',
         'gray': '#475569',
+        'red': '#FF0F0F'
       },
       fontFamily: {
         'title': ['Libre Franklin','sans-serif'],

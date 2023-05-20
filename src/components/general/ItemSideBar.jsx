@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {iconos} from "../../../data/iconsSideBar"
+import {iconos} from "../../data/iconsSideBar"
 
 const ItemSideBar = ({ info }) => {
     const navigate = useNavigate();

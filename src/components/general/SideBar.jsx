@@ -1,5 +1,5 @@
-import { infoSideBar } from '../../../data/infoSideBar'
-import ItemSideBar from '../ItemSideBard/ItemSideBar'
+import { infoSideBar } from '../../data/infoSideBar'
+import ItemSideBar from './ItemSideBar'
 import { FaUserAlt } from "react-icons/fa";
 
 const SideBar = ({role}) => {

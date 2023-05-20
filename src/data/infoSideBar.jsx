@@ -5,7 +5,7 @@ export const infoSideBar=[
         name :"Parqueaderos",
         page:"/Parkings",
         icon :"faLocationDot",
-        profile:['cliente','admin']
+        profile:['cliente','admin','superAdmin']
     },
     {
         id: "button-addCar",
@@ -25,7 +25,7 @@ export const infoSideBar=[
         id: "button-reservations",
         name :"Tus reservas",
         icon :"faRectangleList",
-        page: "/YourReservation",
+        page: "/YourReservations",
         profile:['cliente']
     },
     {
