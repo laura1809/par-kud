@@ -4,8 +4,8 @@
 const Historial = () => {
     return (
         <>
-            <section>
-                <h1 className='text-black text-5xl font-semibold'>Historial de usuario</h1>
+            <section className="mx-12">
+            <h1 className="mt-4 text-4xl font-bold leading-none tracking-tight  text-center">Historial de usuario</h1>
                 <form>
                     <div className="grid gap-6 mb-6">
                         <div>

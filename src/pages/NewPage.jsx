@@ -6,9 +6,9 @@ const NewPage = (Component) => {
         <>
             <div className="flex">
                 <div className="w-1/5">
-                    <SideBar role={'superAdmin'} />
+                    <SideBar role={'cliente'} />
                 </div>
-                <div className="w-3/4 flex flex-col min-h-screen">
+                <div className="w-full flex flex-col min-h-screen bg-hero bg-no-repeat bg-cover bg-center bg-fixed">
                     <Component />
                     <Footer />
                 </div>

@@ -16,7 +16,10 @@ export default {
         'title': ['Libre Franklin','sans-serif'],
         'subtitle': ['Merriweather Sans', 'sans-serif'],
         'paragraph': ['Numans', 'sans-serif']
-      }
+      },
+      backgroundImage: {
+        'hero': "url('https://img.freepik.com/vector-premium/fondo-vector-monocromo-blanco-abstracto-folleto-diseno-folleto-sitio-web-fondo-pantalla-blanco-geometrico-pagina-inicio-presentacion-certificado_249611-6006.jpg?w=900')",
+      },
     },
   },
   plugins: [],
