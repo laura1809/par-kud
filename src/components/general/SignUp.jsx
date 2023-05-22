@@ -2,130 +2,86 @@ import React from 'react'
 
 const SignUp = () => {
   return (
-    <main className="container flex justify-center mx-auto mt-12">
-            <article id="userRegister" className="w-2/5 2xl:w-1/3 absolute rounded-2xl bg-gradient-to-b from-lightGreen to-darkGreen">
-                <img src="https://res.cloudinary.com/dn1k0drir/image/upload/v1679111733/NatAmE/Logo_oeniv6.png" alt="Logo de la app" id="appLogo" width="350" height="250"
-                    className="mx-auto mt-4" />
+    <>
+    <div className=" bg-gray-100 flex flex-col justify-center">
+      <div className="abosulte t-0 py-2 sm:max-w-xl sm:mx-auto">
+        <div className="relative px-4 py-2 bg-trasnparent mx-8 md:mx-0 border-black rounded-3xl sm:p-4 ">
+          <div className="max-w-md mx-auto">
+            <div className="flex items-center space-x-5">
+              <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">i</div>
+              <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
+                <h2 className="leading-relaxed">Registra tu vehículo</h2>
+                <p className="text-sm text-gray-500 font-normal leading-relaxed">Completa los siguientes campos.</p>
+              </div>
+            </div>
 
-                <form action="" id="userRegister-form" className="mt-6">
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-idType">
-                            <label htmlFor="idType"></label>
-                            <select name="idType" id="idType" value={idType} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md bg-white shadow-md 
-                             font-medium font-title" onChange={(e) => setIdType(e.target.value)} required>
-                                <option value="" disabled hidden> Tipo ID </option>
-                                <option value="CC"> C.C </option>
-                                <option value="TI"> T.I </option>
-                            </select>
-                        </div>
-
-                        <div id="form-idNumber">
-                            <label htmlFor="idNumber"></label>
-                            <input type="text" name="idNumber" id="idNumber" placeholder="Número ID" value={idNumber} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setIdNumber(e.target.value)} required />
-                        </div>
+            <div className="divide-y divide-gray-200">
+              <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Primer nombre</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Primer nombre" />
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-name">
-                            <label htmlFor="name"></label>
-                            <input type="text" name="name" id="name" placeholder="Nombre completo" value={name} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setName(e.target.value)} required />
-                        </div>
-
-                        <div id="form-lastName">
-                            <label htmlFor="lastName"></label>
-                            <input type="text" name="lastName" id="lastName" placeholder="Apellido completo" value={lastName} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 
-                            rounded-md bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setLastName(e.target.value)} required />
-                        </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Segundo nombre</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Segundo nombre" />
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-genre" className="w-full">
-                            <fieldset value={genre} className="flex justify-around mb-6 px-3 py-2 rounded-md bg-white shadow-md text-black font-medium font-title 
-                            placeholder-slate-400" onChange={(e) => setGenre(e.target.value)} required>
-                                <div className="flex">
-                                    <label htmlFor="M" className="mr-2"> Hombre </label>
-                                    <input type="radio" name="genre" id="male" value="M" />
-                                </div>
-
-                                <div className="flex">
-                                    <label htmlFor="F" className="mr-2"> Mujer </label>
-                                    <input type="radio" name="genre" id="female" value="F" />
-                                </div>
-
-                                <div className="flex">
-                                    <label htmlFor="other" className="mr-2"> Otro </label>
-                                    <input type="radio" name="O" id="other" value="O" />
-                                </div>
-                            </fieldset>
-
-                        </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Primer apellido</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Primer apellido" />
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-city">
-                            <label htmlFor="city"></label>
-                            <input type="text" name="city" id="city" placeholder="Ciudad" value={city} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md bg-white 
-                            shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setCity(e.target.value)} required />
-                        </div>
-
-                        <div id="form-address">
-                            <label htmlFor="address"></label>
-                            <input type="text" name="address" id="address" placeholder="Dirección" value={address} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setAddress(e.target.value)} required />
-                        </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Segundo apellido</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Segundo apellido" />
                     </div>
+                  </div>
+                </div>
 
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-birthDate" className="flex w-full justify-between mb-6 px-3 py-2 rounded-md bg-white shadow-md text-slate-400 font-medium font-title 
-                        placeholder-slate-400">
-                            <h1> Fecha de nacimiento </h1>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Tipo de Documento</label>
+                  <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+                    <option value="Automovil" selected>C.C</option>
+                    <option value="Moto" >NUIP</option>
+                    <option value="SUV">T.I</option>
+                  </select>
 
-                            <label htmlFor="birthDate"></label>
-                            <input type="date" name="birthDate" id="birthDate" value={birthDate} className="text-black" onChange={(e) => setBirthDate(e.target.value)} required />
-                        </div>
-                    </div>
+                </div>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Docuemnto</label>
+                  <input type="text" className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Docuemnto" />
+                </div>
 
-                    <div id="form-phoneNumber" className="flex justify-center">
-                        <label htmlFor="phoneNumber"></label>
-                        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Número de teléfono" value={phoneNumber} className="w-4/5 mb-6 px-3 py-2 rounded-md 
-                        bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setPhoneNumber(e.target.value)} required />
-                    </div>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Telefono</label>
+                  <input type="text" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Telefono" />
+                </div>
 
-                    <div id="form-email" className="flex justify-center">
-                        <label htmlFor="email"></label>
-                        <input type="email" name="email" id="email" placeholder="Correo electrónico" value={email} className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setEmail(e.target.value)} required />
-                    </div>
-
-                    <div id="form-username" className="flex justify-center">
-                        <label htmlFor="username"></label>
-                        <input type="text" name="username" id="username" value={username} placeholder="Nombre de usuario" className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setUsername(e.target.value)} required />
-                    </div>
-
-                    <div id="form-password" className="flex justify-center">
-                        <label htmlFor="password"></label>
-                        <input type="password" name="password" id="password" placeholder="Contraseña" value={password} className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setPassword(e.target.value)} required />
-                    </div>
-
-                    <div id="form-confirmPassword" className="flex justify-center">
-                        <label htmlFor="confirmPassword"></label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" value={passwordConfirmation} className="w-4/5 px-3 
-                        py-2 rounded-md bg-white shadow-md text-black font-medium font-title placeholder-slate-400"
-                            onChange={(e) => setPasswordConfirmation(e.target.value)} required />
-                    </div>
-
-                    <section className="flex justify-center pb-6 mt-12">
-                        <input type="button" id="button-signUp" value="Crear cuenta" onClick={handleCreateUser}
-                            className={`flex justify-center w-1/3 px-5 py-3 border-white border-x-2 border-y-2 rounded-lg bg-white shadow-lg text-darkGreen text-sm font-semibold 
-                        font-title hover:cursor-pointer hover:bg-transparent hover:text-white transition-colors`} />
-                    </section>
-                </form>
-            </article>
-        </main>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Correo</label>
+                  <input type="email" class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="Correo" />
+                </div>
+              </div>
+              <div class="pt-4 flex items-center space-x-4">
+                <button class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
+                  <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Cancelar
+                </button>
+                <button class="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md ">Registrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
   )
 }
 
