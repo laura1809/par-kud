@@ -6,6 +6,7 @@ import YourVehicles from '../components/customer/YourVehicles';
 import Historial from '../components/administration/Historial';
 import Statistics from '../components/administration/Statistics';
 import RegisterCustomer from '../components/administration/RegisterCustomer';
+import RegisterCard from '../components/customer/RegisterCard';
 
 
 export const components=[
@@ -40,6 +41,10 @@ export const components=[
     {
         component: RegisterCustomer,
         path:"/RegisterCustomer",
+    },
+    {
+        component: RegisterCard,
+        path:"/RegisterCard",
     }
     
     
