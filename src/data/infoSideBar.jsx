@@ -36,6 +36,13 @@ export const infoSideBar=[
         profile:['cliente']
     },
     {
+        id: "button-cards",
+        name :"Registra tarjetas",
+        icon :"faCirclePlus",
+        page: "/RegisterCard",
+        profile:['cliente']
+    },
+    {
         id: "button-statistics",
         name :"Estadísticas",
         icon :"faChartLine",

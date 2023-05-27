@@ -2,39 +2,18 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import axios from 'axios';
+
 const MySwal = withReactContent(Swal)
 
-//import { sendEmail } from '../../services/Email'
+const RegisterCard = () => {
 
-
-const RegisterCustomer = () => {
-  
-  /*const [templateParams, setTemplateParams] = useState({
-    email : 'ltrr2001@gmail.com',
-    to_name: 'Laura',
-    first_password: 'example123'
-  })
-
-  const handleSendEmail = async ()=> {
-    const succes= await sendEmail(templateParams);
-    (!succes) ? alert('Correo enviado'):alert('No se pudo enviar el correo')
-  }
-  
-  return (
-    <>
-      <button className='bg-red text-white p-2 w-40' onClick={handleSendEmail}>Enviar correo</button>;
-    </>
-  )*/
-
-  
   const [primerNombre, setPrimerNombre] = useState('');
   const [segundoNombre, setSegundoNombre] = useState('');
   const [primerApellido, setPrimerApellido] = useState('');
   const [segundoApellido, setSegundoApellido] = useState('');
-  const [tipoDocumento, setTipoDocumento] = useState('C.C');
-  const [documento, setDocumento] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [correo, setCorreo] = useState('');
+  const [tarjeta, setTarjeta] = useState('');
+  const [mes, setMes] = useState('');
+  const [anio, setAnio] = useState('');
 
   const handlePrimerNombreChange = (event) => {
     setPrimerNombre(event.target.value);
@@ -52,20 +31,16 @@ const RegisterCustomer = () => {
     setSegundoApellido(event.target.value);
   };
 
-  const handleTipoDeDocumpetoChange = (event) => {
-    setTipoDocumento(event.target.value);
+  const handleTarjetaChange = (event) => {
+    setTarjeta(event.target.value);
   };
 
-  const handleNumeroDeDocumentoChange = (event) => {
-    setDocumento(event.target.value);
+  const handleMesChange = (event) => {
+    setMes(event.target.value);
   };
 
-  const handleTelefonoChange = (event) => {
-    setTelefono(event.target.value);
-  };
-
-  const handleCorreoChange = (event) => {
-    setCorreo(event.target.value);
+  const handleAnioChange = (event) => {
+    setAnio(event.target.value);
   };
 
   const onSubmit = () => {
@@ -73,10 +48,9 @@ const RegisterCustomer = () => {
     if(primerNombre.length > 0 && 
       primerApellido.length > 0 && 
       segundoApellido.length > 0 && 
-      tipoDocumento.length > 0 && 
-      documento.length > 0 && 
-      telefono.length > 0 &&
-      correo.length > 0
+      tarjeta.length > 0 && 
+      mes.length > 0 && 
+      anio.length > 0
       ){
 
         const objectData = {
@@ -84,10 +58,9 @@ const RegisterCustomer = () => {
             secondName: segundoNombre,
             firstSurname : primerApellido,
             secondSurname: segundoApellido,
-            docuemntType: tipoDocumento,
-            document: documento,
-            phone: telefono,
-            emai: correo
+            card: tarjeta,
+            month: mes,
+            year: anio
         }
 
         console.log(objectData)
@@ -97,7 +70,7 @@ const RegisterCustomer = () => {
           console.log(response.data);
           MySwal.fire({
             title: <strong>Listo</strong>,
-            html: <i>Registro Completado</i>,
+            html: <i>Tarjeta Registrada</i>,
             icon: 'success'
           })
           // Realizar cualquier otra acción con la respuesta del servidor
@@ -130,8 +103,8 @@ const RegisterCustomer = () => {
           <div className="max-w-md mx-auto">
             <div className="flex items-center space-x-5">
               <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                <h2 className="leading-relaxed">Registrate</h2>
-                <p className="text-sm text-gray-500 font-normal leading-relaxed">Completa los siguientes campos.</p>
+                <h2 className="leading-relaxed">Registra tu tarjeta</h2>
+                <p className="text-sm text-gray-500 font-normal leading-relaxed">Completa los siguientes campos con los datos del titular.</p>
               </div>
             </div>
 
@@ -187,45 +160,38 @@ const RegisterCustomer = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <label className="leading-loose">Tipo de Documento</label>
-                  <select 
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                    value={tipoDocumento}
-                    onChange={handleTipoDeDocumpetoChange}>
-                    <option value="C.C">C.C</option>
-                    <option value="NUIP" >NUIP</option>
-                    <option value="T.I">T.I</option>
-                  </select>
-
-                </div>
-                <div className="flex flex-col">
-                  <label className="leading-loose">Docuemnto</label>
+                  <label className="leading-loose">Numero de tarjeta</label>
                   <input 
-                    type="text" 
+                    type="number" 
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
-                    placeholder="Docuemnto"
-                    value={documento}
-                    onChange={handleNumeroDeDocumentoChange} />
+                    placeholder="Numero de la tarjeta"
+                    value={tarjeta}
+                    onChange={handleTarjetaChange} />
                 </div>
 
-                <div className="flex flex-col">
-                  <label className="leading-loose">Telefono</label>
-                  <input 
-                    type="text" 
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
-                    placeholder="Telefono"
-                    value={telefono}
-                    onChange={handleTelefonoChange} />
-                </div>
-
-                <div className="flex flex-col">
-                  <label className="leading-loose">Correo</label>
-                  <input 
-                    type="email" 
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
-                    placeholder="Correo"
-                    value={correo}
-                    onChange={handleCorreoChange} />
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Mes de vencimiento</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="number" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="00" 
+                        value={mes}
+                        onChange={handleMesChange}/>
+                    </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Año de vencimiento</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="number" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="0000"
+                        value={anio}
+                        onChange={handleAnioChange} />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="pt-4 flex items-center space-x-4">
@@ -243,4 +209,4 @@ const RegisterCustomer = () => {
   )
 }
 
-export default RegisterCustomer
+export default RegisterCard

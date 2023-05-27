@@ -1,131 +1,225 @@
-import React from 'react'
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import axios from 'axios';
+
+const MySwal = withReactContent(Swal)
 
 const SignUp = () => {
+
+  const [primerNombre, setPrimerNombre] = useState('');
+  const [segundoNombre, setSegundoNombre] = useState('');
+  const [primerApellido, setPrimerApellido] = useState('');
+  const [segundoApellido, setSegundoApellido] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState('C.C');
+  const [documento, setDocumento] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+
+  const handlePrimerNombreChange = (event) => {
+    setPrimerNombre(event.target.value);
+  };
+
+  const handleSegundoNombreChange = (event) => {
+    setSegundoNombre(event.target.value);
+  };
+
+  const handlePrimerApellidoChange = (event) => {
+    setPrimerApellido(event.target.value);
+  };
+
+  const handleSegundoApellidoChange = (event) => {
+    setSegundoApellido(event.target.value);
+  };
+
+  const handleTipoDeDocumpetoChange = (event) => {
+    setTipoDocumento(event.target.value);
+  };
+
+  const handleNumeroDeDocumentoChange = (event) => {
+    setDocumento(event.target.value);
+  };
+
+  const handleTelefonoChange = (event) => {
+    setTelefono(event.target.value);
+  };
+
+  const handleCorreoChange = (event) => {
+    setCorreo(event.target.value);
+  };
+
+  const onSubmit = () => {
+
+    if(primerNombre.length > 0 && 
+      primerApellido.length > 0 && 
+      segundoApellido.length > 0 && 
+      tipoDocumento.length > 0 && 
+      documento.length > 0 && 
+      telefono.length > 0 &&
+      correo.length > 0
+      ){
+
+        const objectData = {
+            firstName: primerNombre,
+            secondName: segundoNombre,
+            firstSurname : primerApellido,
+            secondSurname: segundoApellido,
+            docuemntType: tipoDocumento,
+            document: documento,
+            phone: telefono,
+            emai: correo
+        }
+
+        console.log(objectData)
+
+        axios.post('/api/posts', objectData)
+        .then(response => {
+          console.log(response.data);
+          MySwal.fire({
+            title: <strong>Listo</strong>,
+            html: <i>Registro Completado</i>,
+            icon: 'success'
+          })
+          // Realizar cualquier otra acción con la respuesta del servidor
+        })
+        .catch(error => {
+          console.error(error);
+          MySwal.fire({
+            title: <strong>Error</strong>,
+            html: <i>Registro No Completado</i>,
+            icon: 'error'
+          })
+          // Manejar cualquier error que ocurra durante la petición
+        });
+    
+    }else{
+      MySwal.fire({
+        title: <strong>Error</strong>,
+        html: <i>Debe rellenar todos lo campos</i>,
+        icon: 'error'
+      })
+    }
+
+  }
+
   return (
-    <main className="container flex justify-center mx-auto mt-12">
-            <article id="userRegister" className="w-2/5 2xl:w-1/3 absolute rounded-2xl bg-gradient-to-b from-lightGreen to-darkGreen">
-                <img src="https://res.cloudinary.com/dn1k0drir/image/upload/v1679111733/NatAmE/Logo_oeniv6.png" alt="Logo de la app" id="appLogo" width="350" height="250"
-                    className="mx-auto mt-4" />
+    <>
+    <div className=" bg-gray-100 flex flex-col justify-center">
+      <div className="abosulte t-0 py-2 sm:max-w-xl sm:mx-auto">
+        <div className="relative px-4 py-2 bg-trasnparent mx-8 md:mx-0 border-black rounded-3xl sm:p-4 ">
+          <div className="max-w-md mx-auto">
+            <div className="flex items-center space-x-5">
+              <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
+                <h2 className="leading-relaxed">Registrate</h2>
+                <p className="text-sm text-gray-500 font-normal leading-relaxed">Completa los siguientes campos.</p>
+              </div>
+            </div>
 
-                <form action="" id="userRegister-form" className="mt-6">
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-idType">
-                            <label htmlFor="idType"></label>
-                            <select name="idType" id="idType" value={idType} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md bg-white shadow-md 
-                             font-medium font-title" onChange={(e) => setIdType(e.target.value)} required>
-                                <option value="" disabled hidden> Tipo ID </option>
-                                <option value="CC"> C.C </option>
-                                <option value="TI"> T.I </option>
-                            </select>
-                        </div>
-
-                        <div id="form-idNumber">
-                            <label htmlFor="idNumber"></label>
-                            <input type="text" name="idNumber" id="idNumber" placeholder="Número ID" value={idNumber} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setIdNumber(e.target.value)} required />
-                        </div>
+            <div className="divide-y divide-gray-200">
+              <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Primer nombre</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="text" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="Primer nombre"
+                        value={primerNombre}
+                        onChange={handlePrimerNombreChange} />
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-name">
-                            <label htmlFor="name"></label>
-                            <input type="text" name="name" id="name" placeholder="Nombre completo" value={name} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setName(e.target.value)} required />
-                        </div>
-
-                        <div id="form-lastName">
-                            <label htmlFor="lastName"></label>
-                            <input type="text" name="lastName" id="lastName" placeholder="Apellido completo" value={lastName} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 
-                            rounded-md bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setLastName(e.target.value)} required />
-                        </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Segundo nombre</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="text" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="Segundo nombre"
+                        value={segundoNombre}
+                        onChange={handleSegundoNombreChange} />
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-genre" className="w-full">
-                            <fieldset value={genre} className="flex justify-around mb-6 px-3 py-2 rounded-md bg-white shadow-md text-black font-medium font-title 
-                            placeholder-slate-400" onChange={(e) => setGenre(e.target.value)} required>
-                                <div className="flex">
-                                    <label htmlFor="M" className="mr-2"> Hombre </label>
-                                    <input type="radio" name="genre" id="male" value="M" />
-                                </div>
-
-                                <div className="flex">
-                                    <label htmlFor="F" className="mr-2"> Mujer </label>
-                                    <input type="radio" name="genre" id="female" value="F" />
-                                </div>
-
-                                <div className="flex">
-                                    <label htmlFor="other" className="mr-2"> Otro </label>
-                                    <input type="radio" name="O" id="other" value="O" />
-                                </div>
-                            </fieldset>
-
-                        </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Primer apellido</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="text" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="Primer apellido" 
+                        value={primerApellido}
+                        onChange={handlePrimerApellidoChange}/>
                     </div>
-
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-city">
-                            <label htmlFor="city"></label>
-                            <input type="text" name="city" id="city" placeholder="Ciudad" value={city} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md bg-white 
-                            shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setCity(e.target.value)} required />
-                        </div>
-
-                        <div id="form-address">
-                            <label htmlFor="address"></label>
-                            <input type="text" name="address" id="address" placeholder="Dirección" value={address} className="w-32 lg:w-44 sm:w-44 mb-6 px-3 py-2 rounded-md 
-                            bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setAddress(e.target.value)} required />
-                        </div>
+                  </div>
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Segundo apellido</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input 
+                        type="text" 
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                        placeholder="Segundo apellido"
+                        value={segundoApellido}
+                        onChange={handleSegundoApellidoChange} />
                     </div>
+                  </div>
+                </div>
 
-                    <div className="w-4/5 flex justify-between mx-auto">
-                        <div id="form-birthDate" className="flex w-full justify-between mb-6 px-3 py-2 rounded-md bg-white shadow-md text-slate-400 font-medium font-title 
-                        placeholder-slate-400">
-                            <h1> Fecha de nacimiento </h1>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Tipo de Documento</label>
+                  <select 
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    value={tipoDocumento}
+                    onChange={handleTipoDeDocumpetoChange}>
+                    <option value="C.C">C.C</option>
+                    <option value="NUIP" >NUIP</option>
+                    <option value="T.I">T.I</option>
+                  </select>
 
-                            <label htmlFor="birthDate"></label>
-                            <input type="date" name="birthDate" id="birthDate" value={birthDate} className="text-black" onChange={(e) => setBirthDate(e.target.value)} required />
-                        </div>
-                    </div>
+                </div>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Docuemnto</label>
+                  <input 
+                    type="text" 
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                    placeholder="Docuemnto"
+                    value={documento}
+                    onChange={handleNumeroDeDocumentoChange} />
+                </div>
 
-                    <div id="form-phoneNumber" className="flex justify-center">
-                        <label htmlFor="phoneNumber"></label>
-                        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Número de teléfono" value={phoneNumber} className="w-4/5 mb-6 px-3 py-2 rounded-md 
-                        bg-white shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setPhoneNumber(e.target.value)} required />
-                    </div>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Telefono</label>
+                  <input 
+                    type="text" 
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                    placeholder="Telefono"
+                    value={telefono}
+                    onChange={handleTelefonoChange} />
+                </div>
 
-                    <div id="form-email" className="flex justify-center">
-                        <label htmlFor="email"></label>
-                        <input type="email" name="email" id="email" placeholder="Correo electrónico" value={email} className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setEmail(e.target.value)} required />
-                    </div>
-
-                    <div id="form-username" className="flex justify-center">
-                        <label htmlFor="username"></label>
-                        <input type="text" name="username" id="username" value={username} placeholder="Nombre de usuario" className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setUsername(e.target.value)} required />
-                    </div>
-
-                    <div id="form-password" className="flex justify-center">
-                        <label htmlFor="password"></label>
-                        <input type="password" name="password" id="password" placeholder="Contraseña" value={password} className="w-4/5 mb-6 px-3 py-2 rounded-md bg-white 
-                        shadow-md text-black font-medium font-title placeholder-slate-400" onChange={(e) => setPassword(e.target.value)} required />
-                    </div>
-
-                    <div id="form-confirmPassword" className="flex justify-center">
-                        <label htmlFor="confirmPassword"></label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar contraseña" value={passwordConfirmation} className="w-4/5 px-3 
-                        py-2 rounded-md bg-white shadow-md text-black font-medium font-title placeholder-slate-400"
-                            onChange={(e) => setPasswordConfirmation(e.target.value)} required />
-                    </div>
-
-                    <section className="flex justify-center pb-6 mt-12">
-                        <input type="button" id="button-signUp" value="Crear cuenta" onClick={handleCreateUser}
-                            className={`flex justify-center w-1/3 px-5 py-3 border-white border-x-2 border-y-2 rounded-lg bg-white shadow-lg text-darkGreen text-sm font-semibold 
-                        font-title hover:cursor-pointer hover:bg-transparent hover:text-white transition-colors`} />
-                    </section>
-                </form>
-            </article>
-        </main>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Correo</label>
+                  <input 
+                    type="email" 
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" 
+                    placeholder="Correo"
+                    value={correo}
+                    onChange={handleCorreoChange} />
+                </div>
+              </div>
+              <div className="pt-4 flex items-center space-x-4">
+                <button className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
+                  <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg> Cancelar
+                </button>
+                <button className="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md " onClick={onSubmit}>Registrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
   )
 }
 
