@@ -7,9 +7,12 @@ const Parking = () => {
   const [parkings, setParkings] = useState([])
   const [parkingTable, setParkingTable] = useState([])
   const [search, setSearch] = useState("")
+  const [diaActual, setDiaActual] = useState('');
 
+
+  
   const parkingsPetition = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    axios.get('http://localhost:5000/cliente/parqueaderos')
       .then(res => {
         setParkings(res.data);
         setParkingTable(res.data);
@@ -21,12 +24,11 @@ const Parking = () => {
   const handleChange = (e) => {
     setSearch(e.target.value);
     filter(e.target.value);
-    console.log(e.target.value);
   }
 
   const filter = (word) => {
     let resultSearch = parkingTable.filter(element => {
-      if (element.name.toLowerCase().includes(word.toLowerCase())) {
+      if (element['Nombre parqueadero'].toLowerCase().includes(word.toLowerCase())) {
         return element;
       }
     })
@@ -35,13 +37,24 @@ const Parking = () => {
   }
 
   useEffect(() => {
+    const obtenerDiaActual = () => {
+      const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      const fechaActual = new Date();
+      const dia = fechaActual.getDay();
+      const nombreDia = diasSemana[dia];
+      setDiaActual(nombreDia);
+    };
+
+    obtenerDiaActual();
     parkingsPetition()
   }, [])
+
+  
 
   return (
     <>
       <h1 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white text-center">Nuestros parqueaderos</h1>
-      
+      <h2 className="my-3 text-lg font-bold leading-none tracking-tight text-gray-900 text-center">Día de la semana:  {diaActual}</h2>
 
       <form className="mx-64">
         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Buscar</label>
@@ -56,8 +69,8 @@ const Parking = () => {
       <article className="relative w-full h-3/4 top-10 justify-center">
         <section className="grid grid-cols-3 h-fit pb-6 ">
           {
-            parkings.map((parking) => (
-              <ParkingCard key={parking.id} info={parking} />
+            parkings.map((parking,index) => (
+              <ParkingCard key={index} info={parking} />
             ))
 
           }

@@ -1,4 +1,4 @@
-import SideBar from "../components/general/SideBar"
+import SideBar from "../components/general/SideBar/SideBar"
 import Footer from "../components/general/Footer"
 
 const NewPage = (Component) => {

@@ -5,7 +5,7 @@ export const infoSideBar=[
         name :"Parqueaderos",
         page:"/Parkings",
         icon :"faLocationDot",
-        profile:['cliente','admin','superAdmin']
+        profile:['cliente','administrador','gerente']
     },
     {
         id: "button-addCar",
@@ -47,27 +47,27 @@ export const infoSideBar=[
         name :"Estadísticas",
         icon :"faChartLine",
         page: "/Statistics",
-        profile:['admin','superAdmin']
+        profile:['administrador','gerente']
     },
     {
         id: "button-historial",
         name :"Historial",
         icon :"faAddressCard",
         page: "/Historial",
-        profile:['admin']
+        profile:['administrador']
     },
     {
         id: "button-registerCustomer",
         name :"Registrar cliente",
         icon :"faUserPlus",
         page: "/RegisterCustomer",
-        profile:['admin']
+        profile:['administrador']
     },
     {
         id: "button-logOut",
         name :"Cerrar sesión",
         icon :"faRightToBracket",
-        page: "/Login",
-        profile :['cliente','admin','superAdmin']
+        page: "/",
+        profile :['cliente','administrador','gerente']
     }
 ]

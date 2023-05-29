@@ -1,12 +1,12 @@
-import Parking from '../components/general/Parking';
-import RegisterVehicles from '../components/customer/RegisterVehicles'
+import Parking from '../components/general/Parkings/Parking';
+import RegisterVehicles from '../components/customer/Vehicles/RegisterVehicles'
 import MakeReservation from '../components/customer/Reservations/MakeReservation';
 import YourReservations from '../components/customer/Reservations/YourReservations';
-import YourVehicles from '../components/customer/YourVehicles';
+import YourVehicles from '../components/customer/Vehicles/YourVehicles';
 import Historial from '../components/administration/Historial';
 import Statistics from '../components/administration/Statistics';
 import RegisterCustomer from '../components/administration/RegisterCustomer';
-import RegisterCard from '../components/customer/RegisterCard';
+import RegisterCard from '../components/customer/CreditCard/RegisterCard';
 
 
 export const components=[
