@@ -8,6 +8,13 @@ export const infoSideBar=[
         profile:['cliente','administrador','gerente']
     },
     {
+        id: "button-parkings",
+        name :"Sucursal",
+        icon :"faLocationDot",
+        page: "/Subsidiary",
+        profile :['administrador','gerente']
+    },
+    {
         id: "button-addCar",
         name :"Registra tu vehículo",
         icon :"faCarSide",

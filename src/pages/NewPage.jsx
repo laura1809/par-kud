@@ -6,7 +6,7 @@ const NewPage = (Component) => {
         <>
             <div className="flex">
                 <div className="w-1/5">
-                    <SideBar role={'cliente'} />
+                    <SideBar role={'administrador'} />
                 </div>
                 <div className="w-full flex flex-col min-h-screen bg-hero bg-no-repeat bg-cover bg-center bg-fixed">
                     <Component />
