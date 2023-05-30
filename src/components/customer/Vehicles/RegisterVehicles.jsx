@@ -36,7 +36,7 @@ const RegisterVehicles = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://ejemplo.com/api/formulario", formData)
+      .post("https://ejemplo.com/api/formulario/", formData)
       .then((response) => {
         alert("Vehículo registrado con éxito");
         console.log(response.data);
