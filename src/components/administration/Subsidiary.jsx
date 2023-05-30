@@ -10,7 +10,7 @@ const AdminParkingCard = () => {
   return (
     <>
       <h1 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Sucursal</h1>
-      <div className="mx-6 my-2 p-5 bg-white max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+      <div className="mx-6 my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
         <h5 className="mb-2 bg-red text-lg text-center font-semibold tracking-tight text-white rounded">Cedritos</h5>
         <p className="mb-1 text-sm font-normal text-center text-black"><span className="font-semibold">Tipo sucursal:</span> Tipo Suc </p>
         <p className="mb-1 text-sm font-normal text-center text-black"><span className="font-semibold">Ciudad:</span> Bogotá </p>
@@ -28,7 +28,7 @@ const AdminParkingCard = () => {
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SUV</th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="bg-transparent divide-y divide-gray-200">
               <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
@@ -39,7 +39,7 @@ const AdminParkingCard = () => {
         </p>
       </div>
 
-      <div className="mx-6 my-2 p-5 bg-white max-w-[700px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+      <div className="mx-6 my-2 p-5 bg-transparentmax-w-[700px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
 
         <p className="mt-1 text-sm font-normal text-black text-center"><span className="font-bold">Tarifas</span> </p>
         <hr />
@@ -51,7 +51,7 @@ const AdminParkingCard = () => {
               <th class="px-6 py-3 text- text-xs font-medium text-gray-500 uppercase tracking-wider"><span className="font-bold">Horarios</span> </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-transparent divide-y divide-gray-200">
             <tr>
               <td class="px-6 py-4 whitespace-nowrap">Lunes</td>
               
@@ -63,7 +63,7 @@ const AdminParkingCard = () => {
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cierre</th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-transparent divide-y divide-gray-200">
                     <tr>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora </th>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
@@ -84,7 +84,7 @@ const AdminParkingCard = () => {
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cierre</th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-transparent divide-y divide-gray-200">
                     <tr>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora </th>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
@@ -105,7 +105,7 @@ const AdminParkingCard = () => {
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cierre</th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="bg-transparent divide-y divide-gray-200">
                     <tr>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaa </th>
                       <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaa</th>
@@ -122,7 +122,7 @@ const AdminParkingCard = () => {
         </table>
       </div>
 
-      <div className="mx-6 my-2 p-5 bg-white max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+      <div className="mx-6 my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
         <h5 className="mb-2 bg-blue text-lg text-center font-semibold tracking-tight text-white rounded">Editar</h5>
         <label className="leading-loose">DIA</label>
         <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
@@ -161,7 +161,7 @@ const AdminParkingCard = () => {
         </select>
 
       </div>
-      <div className="mx-6 my-2 p-5 bg-white max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+      <div className="mx-6 my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
         <button className="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md ">
           Editar
         </button>
