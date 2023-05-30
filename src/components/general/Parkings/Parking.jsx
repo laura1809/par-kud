@@ -25,7 +25,7 @@ const Parking = () => {
   }
 
   const parkingsPetition = () => {
-    axios.get('http://parkud.eastus.cloudapp.azure.com:5000/cliente/parqueaderos/',{
+    axios.get('http://parkud.eastus.cloudapp.azure.com:5000/cliente/parqueaderos',{
       headers: {
         'Authorization': `Bearer ${token}`
       }}).then(res => {
