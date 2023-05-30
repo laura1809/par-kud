@@ -53,7 +53,7 @@ const Parking = () => {
 
   return (
     <>
-      <h1 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white text-center">Nuestros parqueaderos</h1>
+      <h1 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center">Nuestros parqueaderos</h1>
       <h2 className="my-3 text-lg font-bold leading-none tracking-tight text-gray-900 text-center">Día de la semana:  {diaActual}</h2>
 
       <form className="mx-64">

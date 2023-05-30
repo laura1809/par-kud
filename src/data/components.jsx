@@ -7,7 +7,7 @@ import Historial from '../components/administration/Historial';
 import Statistics from '../components/administration/Statistics';
 import RegisterCustomer from '../components/administration/RegisterCustomer';
 import RegisterCard from '../components/customer/CreditCard/RegisterCard';
-
+import Subsidiary from '../components/administration/Subsidiary';
 
 export const components=[
     {
@@ -45,7 +45,12 @@ export const components=[
     {
         component: RegisterCard,
         path:"/RegisterCard",
+    },
+    {
+        component: Subsidiary,
+        path:"/Subsidiary",
     }
+    
     
     
 ]
