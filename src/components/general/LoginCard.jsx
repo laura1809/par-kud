@@ -8,6 +8,7 @@ const LoginCard = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rol, setRol] = useState("");
 
   const [token, setToken] = useState("");
 
@@ -20,7 +21,7 @@ const LoginCard = () => {
   };
 
   const handleLogin = () => {
-    validCaptcha ? navigate("/Parkings") : alert("Por favor acepta el captcha");
+    validCaptcha ? window.location.href="/Parkings" : alert("Por favor acepta el captcha");
   };
 
   const handleSignUp = () => {
@@ -47,7 +48,9 @@ const LoginCard = () => {
   useEffect(() => {
     tokenPetition();
     Cookies.set("token", token);
-  }, []);
+    localStorage.setItem('rol',rol);
+
+  }, [rol]);
 
   return (
     <main className="container flex justify-center mx-auto mt-2 mb-0">
@@ -90,6 +93,29 @@ const LoginCard = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <div className="flex justify-center mt-5">
+
+                  <select
+                    name="rol"
+                    required
+                    onChange={(e)=>{setRol(e.target.value)}}
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  >
+                    <option value="">
+                      Selecciona rol
+                    </option>
+                    <option value="cliente">
+                      cliente
+                    </option>
+                    <option value="administrador">
+                      administrador
+                    </option>
+                    <option value="gerente">
+                      gerente
+                    </option>
+                    
+                  </select>
+           </div>
           <div className="flex justify-center mt-5">
             <ReCAPTCHA
               sitekey={key}
