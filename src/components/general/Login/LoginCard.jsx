@@ -6,39 +6,65 @@ import Cookies from "js-cookie";
 
 const LoginCard = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [rol, setRol] = useState("");
-
-  const [token, setToken] = useState("");
 
   const key = "6Ld4DS8mAAAAAEF7bwmdKpvrQtil9Qn2IXYln36F";
   const captcha = useRef(null);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [validLogin, setvalidLogin] = useState(false);
   const [validCaptcha, setValidCaptcha] = useState(false);
 
+  const body = {
+    user: username,
+    password: password,
+  };
+
+  const url = "https://par-kud.azurewebsites.net";
+
+  //-------------------------FUNCIONES-------------------------------------------
+
   const onChange = () => {
-    captcha.current.getValue() ? setValidCaptcha(true) : console.log("error");
+    captcha.current.getValue()
+      ? setValidCaptcha(true)
+      : console.log("error reCAPTCHA");
   };
 
   const handleLogin = () => {
-    validCaptcha ? window.location.href="/Parkings" : alert("Por favor acepta el captcha");
+    loginPetition();
+    validCaptcha 
+      ?  (window.location.href = "/Parkings")
+      : alert("Complete el reCAPTCHA antes de continuar.");
   };
 
   const handleSignUp = () => {
     navigate("/SignUp");
   };
 
-  const body = {
-    user: "parkud_db_admin",
-    password: "20181020027",
+  const loginPetition = () => {
+    console.log(body);
+    axios
+      .post(url + "/cliente/login", body)
+      .then((res) => {
+        console.log(res.data);
+        if ("error" in res.data) {
+          console.log(res.data);
+        } else {
+          const rol = res.data.join("");
+          localStorage.setItem("rol", rol);
+          setvalidLogin(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
   const tokenPetition = () => {
     axios
-      .post("http://parkud.eastus.cloudapp.azure.com:5000/crearToken", body)
+      .post(url + "/crearToken", body)
       .then((res) => {
-        setToken(res.data);
-        
+        console.log(res.data);
+        Cookies.set("token", res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -46,12 +72,12 @@ const LoginCard = () => {
   };
 
   useEffect(() => {
-    tokenPetition();
-    Cookies.set("token", token);
-    localStorage.setItem('rol',rol);
+    if (validLogin) {
+      tokenPetition();
+    }
+  }, [validLogin]);
 
-  }, [rol]);
-
+  // Diseño del componente (HTML y tailwind)
   return (
     <main className="container flex justify-center mx-auto mt-2 mb-0">
       <article
@@ -93,29 +119,7 @@ const LoginCard = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="flex justify-center mt-5">
 
-                  <select
-                    name="rol"
-                    required
-                    onChange={(e)=>{setRol(e.target.value)}}
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                  >
-                    <option value="">
-                      Selecciona rol
-                    </option>
-                    <option value="cliente">
-                      cliente
-                    </option>
-                    <option value="administrador">
-                      administrador
-                    </option>
-                    <option value="gerente">
-                      gerente
-                    </option>
-                    
-                  </select>
-           </div>
           <div className="flex justify-center mt-5">
             <ReCAPTCHA
               sitekey={key}

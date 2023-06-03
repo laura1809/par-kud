@@ -1,22 +1,20 @@
+import axios from "../../../services/axiosconfig";
+import { useState } from "react";
 import Step1Reservation from "./Step1Reservation";
 import Step2Reservation from "./Step2Reservation";
 import Step3Reservation from "./Step3Reservation";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-
 const MakeReservation = () => {
   const [formReserva, setFormReserva] = useState({
-    tipo_vehiculo: null,
+    tipo_vehiculo: undefined,
     info_vehiculo: "",
-    es_cubierto: null,
-    nombre_ciudad: null,
-    nombre_sucursal: null,
+    es_cubierto: undefined,
+    nombre_ciudad: undefined,
+    nombre_sucursal: undefined,
     direccion_sucursal: "",
     fecha_reserva: "",
     hora_reserva: "",
-    puntos_usados: null,
+    puntos_usados: undefined,
     ultimos_cuatro_digitos: 0,
     tipo_tarjeta: "",
     nombre_duenio_tarjeta: "",
@@ -31,29 +29,6 @@ const MakeReservation = () => {
     }));
   };
 
-  const parkingsPetition = () => {
-    axios
-      .get("ruta/", {
-        params: {
-          tipo_vehiculo: formReserva.tipo_vehiculo,
-          nombre_ciudad: formReserva.nombre_ciudad,
-          es_cubierto: formReserva.es_cubierto,
-          nombre_sucursal: formReserva.nombre_sucursal,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    console.log('solicitar petición')
-    parkingsPetition();
-  }, [formReserva.nombre_ciudad,formReserva.nombre_sucursal,formReserva.es_cubierto])
-  
   const validarCVC = () => {
     let cvcRegex = /^[0-9]{3}$/;
     return cvcRegex.test(ultimos_cuatro_digitos);

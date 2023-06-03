@@ -2,8 +2,8 @@ const Historial = () => {
   return (
     <>
       <h1 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Historial Clientes</h1>
-      <div className="mx-6 my-2 p-5 bg-transparent min-w-[200px] max-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
-        <h3 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Buscar Usuario</h3>
+      <div className="my-2 p-5 bg-transparent min-w-[200px] max-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+        <h3 className="text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Buscar Usuario</h3>
 
         <div className="grid grid-cols-3 h-fit pb-6">
           <div className=" inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -17,7 +17,7 @@ const Historial = () => {
 
       </div>
       <section className="grid grid-cols-2 h-fit pb-6 space-x-4">
-        <div className="mx-6 my-2 p-5 bg-transparent min-w-[50px] mx-auto border border-gray-200 rounded-lg shadow ">
+        <div className="my-2 p-5 bg-transparent min-w-[50px] mx-auto border border-gray-200 rounded-lg shadow ">
           <h3 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Filtrar por fecha</h3>
           <div className="grid grid-cols-5 h-fit pb-6 space-x-4">
             <h1 className="text-center">Desde:</h1>
@@ -29,7 +29,7 @@ const Historial = () => {
             </button>
           </div>
         </div>
-        <div className="mx-6 my-2 p-5 bg-transparent min-w-[50px] mx-auto border border-gray-200 rounded-lg shadow ">
+        <div className="my-2 p-5 bg-transparent min-w-[50px] mx-auto border border-gray-200 rounded-lg shadow ">
           <h3 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Ciudad & Sucursal</h3>
 
           <div className="grid grid-cols-2 h-fit pb-6">
@@ -62,7 +62,7 @@ const Historial = () => {
       </section>
       <section>
         <h3 className="my-6 text-xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-dark text-center ">Usuario: Pepito Perez</h3>
-        <div className="mx-6 my-2 p-5 bg-transparent min-w-[200px] max-w-[1000px] mx-auto border border-gray-200 rounded-lg shadow ">
+        <div className="my-2 p-5 bg-transparent min-w-[200px] max-w-[1000px] mx-auto border border-gray-200 rounded-lg shadow ">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-red bg-gray-50">
               <tr>

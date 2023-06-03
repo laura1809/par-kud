@@ -1,4 +1,46 @@
+import { useState, useEffect } from "react";
+import axios from "../../../services/axiosconfig";
+
 const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
+  const [info, setInfo] = useState([]);
+
+  const body = {
+    tipo_vehiculo_p:
+      formData.tipo_vehiculo === undefined ? null : formData.tipo_vehiculo,
+    ciudad_p:
+      formData.nombre_ciudad === undefined ? null : formData.nombre_ciudad,
+    es_parq_encubierto_p:
+      formData.es_cubierto === undefined ? null : formData.es_cubierto,
+    nombre_sucursal_p:
+      formData.nombre_sucursal === undefined ? null : formData.nombre_sucursal,
+  };
+
+  // Paso 1: Obtener todas las ciudades
+  const ciudades = info.map((objeto) => objeto["Ciudad"]);
+
+  // Paso 2: Filtrar solo los valores únicos
+  const ciudadesUnicas = ciudades.filter(
+    (ciudad, index) => ciudades.indexOf(ciudad) === index
+  );
+
+  const parkingsPetition = () => {
+    console.log(body);
+    axios
+      .post("/cliente/sucursales", body)
+      .then((res) => {
+        setInfo(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    console.log("solicitar petición");
+    parkingsPetition();
+  }, [formData.nombre_ciudad, formData.nombre_sucursal, formData.es_cubierto]);
+
   return (
     <div
       id="form2"
@@ -32,10 +74,14 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
-                      <option value="" selected>
-                        Selecciona una ciudad
-                      </option>
-                      <option value="Ciudad 1">Ciudad 1</option>
+                      <option value="">Selecciona una ciudad</option>
+                      {ciudadesUnicas.map((item, index) => {
+                        return (
+                          <option key={index} value={item}>
+                            {item}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="flex flex-col w-full">
@@ -49,8 +95,8 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
                       <option value="">Selecciona una opción</option>
-                      <option value={true}>Si</option>
-                      <option value={false}>No</option>
+                      <option value="true">Si</option>
+                      <option value="false">No</option>
                     </select>
                   </div>
                 </div>
@@ -62,7 +108,7 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       name="tipo_parqueadero"
                       value={formData.tipo_vehiculo}
                       type="text"
-                      class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                      className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                       placeholder="Parquedero"
                       disabled
                     />
@@ -75,36 +121,38 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
-                      <option value="">
-                        Selecciona sucursal
-                      </option>
-                      <option value="Sucursal 1">
-                        Sucursal 1
-                      </option>
+                      <option value="">Selecciona sucursal</option>
+                      {info.map((item, index) => {
+                        return (
+                          <option key={index} value={item["Nombre sucursal"]}>
+                            {item["Nombre sucursal"]}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                 </div>
               </div>
-              <div class="pt-4 flex items-center space-x-4">
-                <button class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
+              <div className="pt-4 flex items-center space-x-4">
+                <button className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
                   <svg
-                    class="w-6 h-6 mr-3"
+                    className="w-6 h-6 mr-3"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                     ></path>
                   </svg>{" "}
                   Limpiar filtros
                 </button>
                 <button
-                  class="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md"
+                  className="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md"
                   onClick={enableDiv("form3")}
                 >
                   Buscar

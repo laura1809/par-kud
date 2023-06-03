@@ -1,11 +1,14 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import axios from "axios";
+import axios from '../../../services/axiosconfig'
 
 const MySwal = withReactContent(Swal);
 
 const RegisterCard = () => {
+
+  
+
   const [primerNombre, setPrimerNombre] = useState("");
   const [primerApellido, setPrimerApellido] = useState("");
   const [tarjeta, setTarjeta] = useState("");
@@ -81,17 +84,18 @@ const RegisterCard = () => {
     ) {
       if (tarjetaValida && tipoTarjeta != "No válido") {
         const objectData = {
-          nombre_duenio_tarjeta: primerNombre,
-          apellido_duenio_tarjeta: primerApellido,
-          numero_tarjeta: tarjeta,
-          ultimos_cuatro_digitos: digitos,
-          mes_vencimiento: mes,
-          anio_vencimiento: anio,
+          nombre_duenio_tarjeta_p: primerNombre,
+          apellido_duenio_tarjeta_p: primerApellido,
+          numero_tarjeta_p: tarjeta,
+          ultimos_cuatro_digitos_p: digitos,
+          mes_vencimiento_p: parseInt(mes),
+          anio_vencimiento_p: parseInt(anio),
+          tipo_tarjeta_p:tipoTarjeta
         };
         console.log(objectData);
 
         axios
-          .post("/api/posts", objectData)
+          .post("/cliente/registro/tarjeta", objectData)
           .then((response) => {
             console.log(response.data);
             MySwal.fire({

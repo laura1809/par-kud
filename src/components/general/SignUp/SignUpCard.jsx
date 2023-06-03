@@ -1,38 +1,34 @@
-import { useState } from "react";
+//Importaciones necesarias para el funcionamiento de componente
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
-const MySwal = withReactContent(Swal);
+import { useState } from "react";
+import { sendEmail } from "../../../services/Email";
 
-//import { sendEmail } from '../../services/Email'
+const SignUpCard = () => {
+  // Declaración de variables
+  const urlRegistrarCliente = "https://par-kud.azurewebsites.net/cliente/registro";
+  const MySwal = withReactContent(Swal);
 
-const RegisterCustomer = () => {
-  /*const [templateParams, setTemplateParams] = useState({
-    email : 'ltrr2001@gmail.com',
-    to_name: 'Laura',
-    first_password: 'example123'
-  })
-
-  const handleSendEmail = async ()=> {
-    const succes= await sendEmail(templateParams);
-    (!succes) ? alert('Correo enviado'):alert('No se pudo enviar el correo')
-  }
-  
-  return (
-    <>
-      <button className='bg-red text-white p-2 w-40' onClick={handleSendEmail}>Enviar correo</button>;
-    </>
-  )*/
-
+  // Declaración de States
   const [primerNombre, setPrimerNombre] = useState("");
   const [segundoNombre, setSegundoNombre] = useState("");
   const [primerApellido, setPrimerApellido] = useState("");
   const [segundoApellido, setSegundoApellido] = useState("");
-  const [tipoDocumento, setTipoDocumento] = useState("C.C");
+  const [tipoDocumento, setTipoDocumento] = useState("");
   const [documento, setDocumento] = useState("");
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
+  const [password, setPassword] = useState("");
 
+  const templateParams = {
+    email: correo,
+    to_name: primerNombre,
+    first_password: ''
+  }
+  
+
+  // Funciones
   const handlePrimerNombreChange = (event) => {
     setPrimerNombre(event.target.value);
   };
@@ -65,6 +61,16 @@ const RegisterCustomer = () => {
     setCorreo(event.target.value);
   };
 
+  const handleSendEmail = async () => {
+    const succes = await sendEmail(templateParams);
+    !succes ? console.log("Correo enviado") : console.log("No se pudo enviar el correo");
+  };
+
+  const handleLogin = () =>{
+    window.location.href = '/';
+  }
+
+  //Función para realizar la petición
   const onSubmit = () => {
     if (
       primerNombre.length > 0 &&
@@ -82,28 +88,34 @@ const RegisterCustomer = () => {
         nombre2_cliente_p: segundoNombre,
         apellido1_cliente_p: primerApellido,
         apellido2_cliente_p: segundoApellido,
-        telefono_cliente_p: telefono,
+        telefono_cliente_p: parseInt(telefono),
         correo_cliente_p: correo,
+        admin: false
       };
 
       console.log(objectData);
 
       axios
-        .post("/api/posts", objectData)
+        .post(urlRegistrarCliente, objectData)
         .then((response) => {
-          console.log(response.data);
+          const pass = response.data.join('');
+          console.log(pass);
+          templateParams.first_password=pass;
+          console.log(templateParams);
+          handleSendEmail();
           MySwal.fire({
-            title: <strong>Listo</strong>,
-            html: <i>Registro Completado</i>,
+            title: <strong>Registro completado</strong>,
+            html: <i>Tu contraseña fué enviada al correo de tu cuenta.</i>,
             icon: "success",
           });
+          //window.location.href = "/";
           // Realizar cualquier otra acción con la respuesta del servidor
         })
         .catch((error) => {
           console.error(error);
           MySwal.fire({
             title: <strong>Error</strong>,
-            html: <i>Registro No Completado</i>,
+            html: <i>Hubo un error con tu registro</i>,
             icon: "error",
           });
           // Manejar cualquier error que ocurra durante la petición
@@ -117,6 +129,7 @@ const RegisterCustomer = () => {
     }
   };
 
+  // Diseño del componente (HTML y tailwind)
   return (
     <>
       <div className=" bg-gray-100 flex flex-col justify-center">
@@ -194,17 +207,18 @@ const RegisterCustomer = () => {
                       value={tipoDocumento}
                       onChange={handleTipoDeDocumpetoChange}
                     >
+                      <option value="">Seleccione un tipo de doc</option>
                       <option value="CC">C.C</option>
                       <option value="CE">C.E</option>
                       <option value="PAP">PAP</option>
                     </select>
                   </div>
                   <div className="flex flex-col">
-                    <label className="leading-loose">Docuemnto</label>
+                    <label className="leading-loose">Documento</label>
                     <input
                       type="text"
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                      placeholder="Docuemnto"
+                      placeholder="Documento"
                       value={documento}
                       onChange={handleNumeroDeDocumentoChange}
                     />
@@ -233,7 +247,10 @@ const RegisterCustomer = () => {
                   </div>
                 </div>
                 <div className="pt-4 flex items-center space-x-4">
-                  <button className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
+                  <button 
+                    className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white"
+                    onClick={handleLogin}
+                  >
                     <svg
                       className="w-6 h-6 mr-3"
                       fill="none"
@@ -266,4 +283,4 @@ const RegisterCustomer = () => {
   );
 };
 
-export default RegisterCustomer;
+export default SignUpCard;

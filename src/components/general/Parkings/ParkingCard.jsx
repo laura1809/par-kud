@@ -11,8 +11,8 @@ const ParkingCard = ({ info }) => {
             <p className="mb-1 text-sm font-normal text-black "><span className="font-semibold">Disponibilidad de cupos:</span> {info['Disponibilidad']}</p>
             <hr />
             <p className="mt-1 text-sm font-normal text-black"><span className="font-bold">Horarios</span> </p>
-            <p className="mb-1 text-sm font-normal text-black"><span className="font-semibold">Hora de apertura:</span> {info['Tarifa SUV']} a.m </p>
-            <p className="mb-1 text-sm font-normal text-black"><span className="font-semibold">Hora de cierre:</span> {info['Tarifa automóvil']} p.m  </p>
+            <p className="mb-1 text-sm font-normal text-black"><span className="font-semibold">Hora de apertura:</span> {info['Hora abierto']} </p>
+            <p className="mb-1 text-sm font-normal text-black"><span className="font-semibold">Hora de cierre:</span> {info['Hora cerrado']} </p>
             <hr />
             <p className="mt-1 text-sm font-normal text-black"><span className="font-bold">Tarifas</span> </p>
             <p className="mb-1 text-sm font-normal text-black"><span className="font-semibold">SUV:</span> ${info['Tarifa SUV']} minuto </p>

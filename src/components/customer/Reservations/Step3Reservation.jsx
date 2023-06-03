@@ -89,7 +89,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
                 name="ultimo_cuatro_digitos"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
               >
-                <option value="0004" selected>
+                <option value="0004">
                   0004
                 </option>
                 <option value="0005">0005</option>
@@ -103,7 +103,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
                 name="tipo_tarjeta"
                 type="text"
                 value="MasterCard"
-                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 disabled
               />
             </div>
@@ -123,7 +123,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
                 <input
                   name="ultimos_cuadro_digitos"
                   type="text"
-                  class="px-2 py-2 border focus:ring-gray-500 focus:border-gray-900 w-20 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  className="px-2 py-2 border focus:ring-gray-500 focus:border-gray-900 w-20 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                   placeholder="3 dígitos"
                 />
               </div>
@@ -136,28 +136,28 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
         </div>
       </div>
 
-      <div class="flex items-center justify-center space-x-4 mx-auto mb-4 mt-0">
+      <div className="flex items-center justify-center space-x-4 mx-auto mb-4 mt-0">
         <button
-          class="flex justify-center items-center w-1/4 text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white"
+          className="flex justify-center items-center w-1/4 text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white"
           onClick={disableDiv}
         >
           <svg
-            class="w-6 h-6 mr-3"
+            className="w-6 h-6 mr-3"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M6 18L18 6M6 6l12 12"
             ></path>
           </svg>{" "}
           Cancelar
         </button>
-        <button class="bg-yellow flex justify-center items-center w-1/4 text-black font-bold px-4 py-3 shadow rounded-md ">
+        <button className="bg-yellow flex justify-center items-center w-1/4 text-black font-bold px-4 py-3 shadow rounded-md ">
           Reservar
         </button>
       </div>
