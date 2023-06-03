@@ -26,10 +26,13 @@ const AdminParkingCard = () => {
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Carro</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Moto</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SUV</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adicional Cubierto</th>
+
               </tr>
             </thead>
             <tbody class="bg-transparent divide-y divide-gray-200">
               <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
@@ -124,12 +127,7 @@ const AdminParkingCard = () => {
 
       <div className="my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
         <h5 className="mb-2 bg-blue text-lg text-center font-semibold tracking-tight text-white rounded">Editar</h5>
-        <label className="leading-loose">DIA</label>
-        <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
-          <option value="C.C">C.C</option>
-          <option value="NUIP">NUIP</option>
-          <option value="T.I">T.I</option>
-        </select>
+        
 
         <label className="leading-loose">Tipo Vehiculo</label>
         <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
@@ -144,7 +142,19 @@ const AdminParkingCard = () => {
           <option value="NUIP">NUIP</option>
           <option value="T.I">T.I</option>
         </select>
+        <button className="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md ">
+          Editar
+        </button>
 
+
+      </div>
+      <div className="my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
+      <label className="leading-loose">DIA</label>
+        <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
+          <option value="C.C">C.C</option>
+          <option value="NUIP">NUIP</option>
+          <option value="T.I">T.I</option>
+        </select>
         <label className="leading-loose">Horario Apertura</label>
         <select className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600">
           <option value="C.C">C.C</option>
@@ -159,9 +169,6 @@ const AdminParkingCard = () => {
           <option value="NUIP">NUIP</option>
           <option value="T.I">T.I</option>
         </select>
-
-      </div>
-      <div className="my-2 p-5 bg-transparent max-w-[500px] min-w-[500px] mx-auto border border-gray-200 rounded-lg shadow ">
         <button className="bg-yellow flex justify-center items-center w-full text-black font-bold px-4 py-3 shadow rounded-md ">
           Editar
         </button>
