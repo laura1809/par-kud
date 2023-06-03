@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "../../../services/axiosconfig";
 
 const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
+  
   const [info, setInfo] = useState([]);
 
   const body = {
@@ -37,7 +38,6 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
   };
 
   useEffect(() => {
-    console.log("solicitar petición");
     parkingsPetition();
   }, [formData.nombre_ciudad, formData.nombre_sucursal, formData.es_cubierto]);
 

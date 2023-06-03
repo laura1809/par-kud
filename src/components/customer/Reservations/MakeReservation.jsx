@@ -5,6 +5,8 @@ import Step2Reservation from "./Step2Reservation";
 import Step3Reservation from "./Step3Reservation";
 
 const MakeReservation = () => {
+
+  const [step3, setStep3] = useState(false);
   const [formReserva, setFormReserva] = useState({
     tipo_vehiculo: undefined,
     info_vehiculo: "",
@@ -29,12 +31,16 @@ const MakeReservation = () => {
     }));
   };
 
+  
   const validarCVC = () => {
     let cvcRegex = /^[0-9]{3}$/;
     return cvcRegex.test(ultimos_cuatro_digitos);
   };
 
   const enableDiv = (id) => () => {
+    if(id=='form3'){
+        setStep3(true);
+    }
     let div = document.getElementById(id);
     div.classList.remove("pointer-events-none");
     div.classList.remove("bg-gray-300");
@@ -65,6 +71,7 @@ const MakeReservation = () => {
           enableDiv={enableDiv}
           formData={formReserva}
           onFormChange={handleFormChange}
+
         />
       </div>
       <div>
@@ -72,6 +79,7 @@ const MakeReservation = () => {
           disableDiv={disableDiv}
           formData={formReserva}
           onFormChange={handleFormChange}
+          valid={step3}
         />
       </div>
     </>

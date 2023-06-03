@@ -1,5 +1,37 @@
-const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
+import axios from "../../../services/axiosconfig";
+import { useEffect, useState } from "react";
 
+const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
+  const [info, setInfo] = useState();
+  
+  const body = {
+    ciudad_p: formData.nombre_ciudad,
+    es_parq_cubierto_p: formData.es_cubierto,
+    tipo_parqueadero_p: formData.tipo_vehiculo, 
+    nombre_sucursal_p: formData.nombre_sucursal,
+  };
+
+  const parkingInfoPetition = () => {
+    axios
+      .post("/cliente/sucursal/reserva", body)
+      .then((res) => {
+        console.log('información completa: '+res.data);
+        setInfo(res.data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    parkingInfoPetition();
+  
+   
+  }, [valid])
+  
+  
+  
+  
   return (
     <div
       id="form3"
@@ -29,17 +61,13 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
             </div>
             <div className="flex flex-col mx-3">
               <label className="leading-loose font-bold">Dirección</label>
-              <p>{formData.direccion}</p>
+              <p>{info[0]['Dirección']}</p>
             </div>
 
-            <div className="flex flex-col mx-3">
-              <label className="leading-loose font-bold">Slot</label>
-              <p>A1</p>
-            </div>
 
             <div className="flex flex-col mx-3">
               <label className="leading-loose font-bold">Tarifa-minuto</label>
-              <p>$120</p>
+              <p>${info[0]['Tarifa minuto']}</p>
             </div>
 
             <div className="flex flex-col w-40 mx-3">
@@ -89,9 +117,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange }) => {
                 name="ultimo_cuatro_digitos"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
               >
-                <option value="0004">
-                  0004
-                </option>
+                <option value="0004">0004</option>
                 <option value="0005">0005</option>
               </select>
             </div>
