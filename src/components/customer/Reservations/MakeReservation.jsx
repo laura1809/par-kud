@@ -35,7 +35,7 @@ const MakeReservation = () => {
     axios
       .post('/cliente/reservar',formReserva)
       .then((res) => {
-        
+        alert('Reserva hecha');
         console.log("reserva hecha");
       })
       .catch((err) => console.log("error"));

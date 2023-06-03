@@ -15,6 +15,8 @@ const LoginCard = () => {
   const [password, setPassword] = useState("");
   const [validLogin, setvalidLogin] = useState(false);
   const [validCaptcha, setValidCaptcha] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(false);
+  const [tokenCreated, setTokenCreated] = useState(false);
 
   const body = {
     user: username,
@@ -33,9 +35,7 @@ const LoginCard = () => {
 
   const handleLogin = () => {
     loginPetition();
-    validCaptcha
-      ? (window.location.href = "/Parkings")
-      : showAlert('Error','Complete el reCAPTCHA antes de continuar.','error');
+    setInitialLoad(true);
   };
 
   const handleSignUp = () => {
@@ -43,21 +43,16 @@ const LoginCard = () => {
   };
 
   const loginPetition = () => {
-    console.log(body);
     axios
       .post(url + "/cliente/login", body)
       .then((res) => {
-        console.log(res.data);
-        if ("error" in res.data) {
-          console.log(res.data);
-        } else {
-          const rol = res.data.join("");
-          localStorage.setItem("rol", rol);
-          setvalidLogin(true);
-        }
+        // console.log(res.data);
+        setvalidLogin(true);
+        const rol = res.data.join("");
+        localStorage.setItem("rol", rol);
       })
       .catch((err) => {
-        console.log(err);
+        alert("Por favor verifica los campos de entrada");
       });
   };
   const tokenPetition = () => {
@@ -66,17 +61,30 @@ const LoginCard = () => {
       .then((res) => {
         console.log(res.data);
         Cookies.set("token", res.data);
+        setTokenCreated(true);
       })
       .catch((error) => {
         console.log(error);
+        setTokenCreated(false);
       });
   };
-
   useEffect(() => {
-    if (validLogin) {
+    if (validLogin && validCaptcha && initialLoad) {
       tokenPetition();
     }
-  }, [validLogin]);
+  }, [validLogin, validCaptcha, initialLoad]);
+
+  useEffect(() => {
+    if (tokenCreated) {
+       window.location.href = "/Parkings";
+    } else if (initialLoad) {
+      showAlert(
+        "Error",
+        "Error usuario, contraseña o reCAPTCHA incorrectos.",
+        "error"
+      );
+    }
+  }, [tokenCreated]);
 
   // Diseño del componente (HTML y tailwind)
   return (

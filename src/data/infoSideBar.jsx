@@ -5,14 +5,14 @@ export const infoSideBar=[
         name :"Parqueaderos",
         page:"/Parkings",
         icon :"faLocationDot",
-        profile:['user_role','admin_role','sadmin_role']
+        profile:['user_role','admin_role','super_admin_role']
     },
     {
         id: "button-parkings",
         name :"Sucursal",
         icon :"faLocationDot",
         page: "/Subsidiary",
-        profile :['admin_role','sadmin_role']
+        profile :['admin_role','super_admin_role']
     },
     {
         id: "button-addCar",
@@ -54,7 +54,7 @@ export const infoSideBar=[
         name :"Estadísticas",
         icon :"faChartLine",
         page: "/Statistics",
-        profile:['admin_role','sadmin_role']
+        profile:['admin_role','super_admin_role']
     },
     {
         id: "button-historial",
@@ -75,6 +75,6 @@ export const infoSideBar=[
         name :"Cerrar sesión",
         icon :"faRightToBracket",
         page: "/",
-        profile :['user_role','admin_role','sadmin_role']
+        profile :['user_role','admin_role','super_admin_role']
     }
 ]
