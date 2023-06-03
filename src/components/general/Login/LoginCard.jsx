@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { showAlert } from "../../../services/alertsconfig";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -32,9 +33,9 @@ const LoginCard = () => {
 
   const handleLogin = () => {
     loginPetition();
-    validCaptcha 
-      ?  (window.location.href = "/Parkings")
-      : alert("Complete el reCAPTCHA antes de continuar.");
+    validCaptcha
+      ? (window.location.href = "/Parkings")
+      : showAlert('Error','Complete el reCAPTCHA antes de continuar.','error');
   };
 
   const handleSignUp = () => {

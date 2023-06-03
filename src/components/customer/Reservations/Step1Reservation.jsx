@@ -4,12 +4,12 @@ const Step1Reservation = ({ enableDiv, formData, onFormChange }) => {
   
   const [vehicles, setVehicles] = useState([]);
   const vehiclesPetition =()=>{
-    console.log(formData.tipo_vehiculo);
+    // console.log(formData.tipo_vehiculo);
     axios
-    .post('/cliente/vehiculos/tipo',{tipo_vehiculo_p:formData.tipo_vehiculo})
+    .post('/cliente/vehiculos/tipo',{tipo_vehiculo_p:formData.tipo_vehiculo_p})
     .then((res) => {
       setVehicles(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
       console.log(err);
@@ -17,7 +17,7 @@ const Step1Reservation = ({ enableDiv, formData, onFormChange }) => {
   }
   useEffect(() => {
     vehiclesPetition();
-  }, [formData.tipo_vehiculo])
+  }, [formData.tipo_vehiculo_p])
   
   return (
     <div className=" bg-gray-100 flex flex-col justify-center w-1/2">
@@ -41,8 +41,8 @@ const Step1Reservation = ({ enableDiv, formData, onFormChange }) => {
                   <div className="flex flex-col w-full">
                     <label className="leading-loose">Tipo de vehículo</label>
                     <select
-                      name="tipo_vehiculo"
-                      value={formData.tipo_vehiculo}
+                      name="tipo_vehiculo_p"
+                      value={formData.tipo_vehiculo_p}
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
@@ -59,13 +59,13 @@ const Step1Reservation = ({ enableDiv, formData, onFormChange }) => {
                     Tus vehículos registrados
                   </label>
                   <select
-                    name="info_vehiculo"
-                    value={formData.info_vehiculo}
+                    name="marca_placa_vehiculo_p"
+                    value={formData.marca_placa_vehiculo_p}
                     onChange={onFormChange}
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                   >
                     <option value="">
-                      Selecciona {formData.tipo_vehiculo}
+                      Selecciona {formData.tipo_vehiculo_p}
                     </option>
                     {vehicles.map((vehicle,index)=>{
                         return(<option key={index} value={vehicle['Vehículo']}>{vehicle['Vehículo']}</option>)

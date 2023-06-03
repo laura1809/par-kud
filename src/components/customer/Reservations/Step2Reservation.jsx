@@ -7,13 +7,13 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
 
   const body = {
     tipo_vehiculo_p:
-      formData.tipo_vehiculo === undefined ? null : formData.tipo_vehiculo,
+      formData.tipo_vehiculo_p === undefined ? null : formData.tipo_vehiculo_p,
     ciudad_p:
-      formData.nombre_ciudad === undefined ? null : formData.nombre_ciudad,
+      formData.ciudad_p === undefined ? null : formData.ciudad_p,
     es_parq_encubierto_p:
-      formData.es_cubierto === undefined ? null : formData.es_cubierto,
-    nombre_sucursal_p:
-      formData.nombre_sucursal === undefined ? null : formData.nombre_sucursal,
+      formData.es_parq_cubierto_p === undefined ? null : formData.es_parq_cubierto_p,
+      nombre_sucursal_p:
+      formData.nombre_sucursal_p === undefined ? null : formData.nombre_sucursal_p,
   };
 
   // Paso 1: Obtener todas las ciudades
@@ -25,12 +25,12 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
   );
 
   const parkingsPetition = () => {
-    console.log(body);
+    // console.log(body);
     axios
       .post("/cliente/sucursales", body)
       .then((res) => {
         setInfo(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +39,7 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
 
   useEffect(() => {
     parkingsPetition();
-  }, [formData.nombre_ciudad, formData.nombre_sucursal, formData.es_cubierto]);
+  }, [formData.ciudad_p, formData.nombre_sucursal_p, formData.es_parq_cubierto_p]);
 
   return (
     <div
@@ -69,8 +69,8 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                   <div className="flex flex-col w-full">
                     <label className="leading-loose">Ciudad</label>
                     <select
-                      name="nombre_ciudad"
-                      value={formData.nombre_ciudad}
+                      name="ciudad_p"
+                      value={formData.ciudad_p}
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
@@ -89,8 +89,8 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       ¿Parqueadero cubierto?
                     </label>
                     <select
-                      name="es_cubierto"
-                      value={formData.es_cubierto}
+                      name="es_parq_cubierto_p"
+                      value={formData.es_parq_cubierto_p}
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
@@ -106,7 +106,7 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                     <label className="leading-loose">Tipo de parqueadero</label>
                     <input
                       name="tipo_parqueadero"
-                      value={formData.tipo_vehiculo}
+                      value={formData.tipo_vehiculo_p}
                       type="text"
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                       placeholder="Parquedero"
@@ -116,8 +116,8 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                   <div className="flex flex-col w-3/4">
                     <label className="leading-loose">Sucursal</label>
                     <select
-                      name="nombre_sucursal"
-                      value={formData.nombre_sucursal}
+                      name="nombre_sucursal_p"
+                      value={formData.nombre_sucursal_p}
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >

@@ -5,41 +5,50 @@ import Step2Reservation from "./Step2Reservation";
 import Step3Reservation from "./Step3Reservation";
 
 const MakeReservation = () => {
-
   const [step3, setStep3] = useState(false);
   const [formReserva, setFormReserva] = useState({
-    tipo_vehiculo: undefined,
-    info_vehiculo: "",
-    es_cubierto: undefined,
-    nombre_ciudad: undefined,
-    nombre_sucursal: undefined,
-    direccion_sucursal: "",
-    fecha_reserva: "",
-    hora_reserva: "",
-    puntos_usados: undefined,
-    ultimos_cuatro_digitos: 0,
-    tipo_tarjeta: "",
-    nombre_duenio_tarjeta: "",
-    apellido_duenio_tarjeta: "",
+    tipo_vehiculo_p: undefined,
+    marca_placa_vehiculo_p: "",
+    es_parq_cubierto_p: undefined,
+    ciudad_p: undefined,
+    nombre_sucursal_p: undefined,
+    direccion_sucursal_p: "",
+    fecha_reserva_p: "",
+    hora_reserva_p: "",
+    ultimos_cuatro_digitos_p: "",
+    tipo_tarjeta_p: "",
+    nombre_duenio_tarjeta_p: "",
+    apellido_duenio_tarjeta_p: "",
+    puntos_usados_p: 0,
+    tarifa: "",
   });
 
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
-    setFormReserva((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+  const handleFormChange = (e) => {
+    setFormReserva({
+      ...formReserva,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  
+  const reservationPetition = () => {
+    // console.log(formReserva);
+    axios
+      .post('/cliente/reservar',formReserva)
+      .then((res) => {
+        
+        console.log("reserva hecha");
+      })
+      .catch((err) => console.log("error"));
+  };
+
   const validarCVC = () => {
     let cvcRegex = /^[0-9]{3}$/;
-    return cvcRegex.test(ultimos_cuatro_digitos);
+    return cvcRegex.test(ultimos_cuatro_digitos_p);
   };
 
   const enableDiv = (id) => () => {
-    if(id=='form3'){
-        setStep3(true);
+    if (id == "form3") {
+      setStep3(true);
     }
     let div = document.getElementById(id);
     div.classList.remove("pointer-events-none");
@@ -71,7 +80,6 @@ const MakeReservation = () => {
           enableDiv={enableDiv}
           formData={formReserva}
           onFormChange={handleFormChange}
-
         />
       </div>
       <div>
@@ -79,7 +87,9 @@ const MakeReservation = () => {
           disableDiv={disableDiv}
           formData={formReserva}
           onFormChange={handleFormChange}
+          setForm={setFormReserva}
           valid={step3}
+          handleReservation={reservationPetition}
         />
       </div>
     </>

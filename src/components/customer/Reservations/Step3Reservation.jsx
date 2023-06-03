@@ -1,37 +1,78 @@
 import axios from "../../../services/axiosconfig";
 import { useEffect, useState } from "react";
 
-const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
-  const [info, setInfo] = useState();
-  
+const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,handleReservation }) => {
+  const [infoCards, setInfoCards] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
+
   const body = {
-    ciudad_p: formData.nombre_ciudad,
-    es_parq_cubierto_p: formData.es_cubierto,
-    tipo_parqueadero_p: formData.tipo_vehiculo, 
-    nombre_sucursal_p: formData.nombre_sucursal,
+    ciudad_p: formData.ciudad_p,
+    es_parq_cubierto_p: formData.es_parq_cubierto_p,
+    tipo_parqueadero_p: formData.tipo_vehiculo_p,
+    nombre_sucursal_p: formData.nombre_sucursal_p,
   };
 
   const parkingInfoPetition = () => {
     axios
       .post("/cliente/sucursal/reserva", body)
       .then((res) => {
-        setInfo(res.data);
-        formData.direccion_sucursal = info[0]['Dirección'];
+        const direccionSucursal = res.data[0]["Dirección"];
+        const tarifa = res.data[0]["Tarifa minuto"];
+        console.log("Before update:", formData);
+        const updatedFormData = {
+          ...formData,
+          direccion_sucursal_p: direccionSucursal,
+          tarifa: tarifa,
+        };
         
+        setForm(updatedFormData);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const cardsPetition = () => {
+    axios
+      .post("/cliente/metodosDePago")
+      .then((res) => {
+        setInfoCards(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+
+    console.log(selectedValue);
+
+    const selectedOption = infoCards.find(
+      (option) => option["Últimos 4 dígitos"] === selectedValue
+    );
+    const nombre_duenio_tarjeta_p = selectedOption["Nombre"];
+    const apellido_duenio_tarjeta_p = selectedOption["Apellido"];
+    const tipo_tarjeta_p = selectedOption["Tipo tarjeta"];
+
+    const updatedFormData = {
+      ...formData,
+      ultimos_cuatro_digitos_p: selectedValue,
+      nombre_duenio_tarjeta_p: nombre_duenio_tarjeta_p,
+      apellido_duenio_tarjeta_p: apellido_duenio_tarjeta_p,
+      tipo_tarjeta_p:tipo_tarjeta_p
+    };
+
+    setForm(updatedFormData);
+  };
+
   useEffect(() => {
     parkingInfoPetition();
-  
-   
-  }, [valid])
-  
-  
-  
-  
+    cardsPetition();
+  }, [valid]);
+
   return (
     <div
       id="form3"
@@ -53,28 +94,27 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
           <div className="flex">
             <div className="flex flex-col mr-20">
               <label className="leading-loose font-bold ">Ciudad</label>
-              <p>{formData.nombre_ciudad}</p>
+              <p>{formData.ciudad_p}</p>
             </div>
             <div className="flex flex-col mr-20">
               <label className="leading-loose font-bold ">Parqueadero</label>
-              <p>{formData.nombre_sucursal}</p>
+              <p>{formData.nombre_sucursal_p}</p>
             </div>
             <div className="flex flex-col mx-3">
               <label className="leading-loose font-bold">Dirección</label>
-              <p>{info[0]['Dirección']}</p>
+              <p>{formData.direccion_sucursal_p}</p>
             </div>
-
 
             <div className="flex flex-col mx-3">
               <label className="leading-loose font-bold">Tarifa-minuto</label>
-              <p>${info[0]['Tarifa minuto']}</p>
+              <p>${formData.tarifa}</p>
             </div>
 
             <div className="flex flex-col w-40 mx-3">
               <label className="leading-loose font-bold">Fecha reserva</label>
               <input
-                name="fecha_reserva"
-                value={formData.fecha_reserva}
+                name="fecha_reserva_p"
+                value={formData.fecha_reserva_p}
                 onChange={onFormChange}
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 type="date"
@@ -84,8 +124,8 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
             <div className="flex flex-col w-40 mx-3">
               <label className="leading-loose font-bold">Hora de entrada</label>
               <input
-                name="hora_reserva"
-                value={formData.hora_reserva}
+                name="hora_reserva_p"
+                value={formData.hora_reserva_p}
                 onChange={onFormChange}
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 type="time"
@@ -116,8 +156,17 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
               <select
                 name="ultimo_cuatro_digitos"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                value={selectedOption}
+                onChange={handleSelectChange}
               >
-                <option value="0004">0004</option>
+                <option value="">Tarjetas</option>
+                {infoCards.map((card, index) => {
+                  return (
+                    <option key={index} value={card["Últimos 4 dígitos"]}>
+                      {card["Últimos 4 dígitos"]}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div className="flex flex-col mr-20">
@@ -125,7 +174,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
                 Tipo de tarjeta
               </label>
               <input
-                name="tipo_tarjeta"
+                name="tipo_tarjeta_p"
                 type="text"
                 value="MasterCard"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
@@ -182,7 +231,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
           </svg>{" "}
           Cancelar
         </button>
-        <button className="bg-yellow flex justify-center items-center w-1/4 text-black font-bold px-4 py-3 shadow rounded-md ">
+        <button onClick={handleReservation} className="bg-yellow flex justify-center items-center w-1/4 text-black font-bold px-4 py-3 shadow rounded-md ">
           Reservar
         </button>
       </div>
