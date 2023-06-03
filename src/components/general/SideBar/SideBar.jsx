@@ -13,7 +13,7 @@ const SideBar = ({role}) => {
                     <img src="https://res.cloudinary.com/dn1k0drir/image/upload/v1685304390/sale_1_vzaywe.png" alt="Logo de la app" id="appLogo" className="w-40 h-40 mx-auto my-0 p-0" />
                 </div>
                 <div className='flex flex-col items-center mb-4'>
-                    {<h2 className='text-white font-extrabold font-sans'>{role.toUpperCase()}</h2>}
+                    {<h2 className='text-white font-extrabold font-sans'>{role}</h2>}
                 </div>
                 <div className='flex flex-col items-center'>
                     <FaUserAlt className='justify-center text-center text-white text-6xl'/>

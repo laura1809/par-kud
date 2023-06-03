@@ -15,8 +15,8 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
     axios
       .post("/cliente/sucursal/reserva", body)
       .then((res) => {
-        console.log('información completa: '+res.data);
         setInfo(res.data);
+        formData.direccion_sucursal = info[0]['Dirección'];
         
       })
       .catch((error) => {
@@ -118,7 +118,6 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange,valid }) => {
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
               >
                 <option value="0004">0004</option>
-                <option value="0005">0005</option>
               </select>
             </div>
             <div className="flex flex-col mr-20">
