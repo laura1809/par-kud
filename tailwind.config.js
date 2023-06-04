@@ -12,7 +12,7 @@ export default {
         'gray': '#475569',
         'red': '#FF0F0F',
         'green': '#22c55e',
-        'ligth-blue':'#0ea5e9',
+        'ligthBlue':'#0ea5e9',
         'purple':'#a21caf',
         'orange':'#f97316'
       },

@@ -9,14 +9,14 @@ export const colorCity=[
     },
     {
         city:'Medellín',
-        color:'ligth-blue'
+        color:'bg-ligth-blue'
     },
     {
         city:'Cartagena',
-        color:'purple'
+        color:'bg-purple'
     },
     {
         city:'Cali',
-        color:'orange'
+        color:'bg-orange'
     }
 ]
