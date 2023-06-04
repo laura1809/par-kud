@@ -112,7 +112,7 @@ const SignUpCard = () => {
           // Realizar cualquier otra acción con la respuesta del servidor
         })
         .catch((error) => {
-          console.error(error);
+          console.log(error);
           MySwal.fire({
             title: <strong>Error</strong>,
             html: <i>Hubo un error con tu registro</i>,

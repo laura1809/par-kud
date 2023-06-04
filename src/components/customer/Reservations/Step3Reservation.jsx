@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,handleReservation }) => {
   const [infoCards, setInfoCards] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cardType, setCardType] = useState("");
 
   const body = {
     ciudad_p: formData.ciudad_p,
@@ -56,6 +59,10 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,ha
     const nombre_duenio_tarjeta_p = selectedOption["Nombre"];
     const apellido_duenio_tarjeta_p = selectedOption["Apellido"];
     const tipo_tarjeta_p = selectedOption["Tipo tarjeta"];
+
+    setName(nombre_duenio_tarjeta_p);
+    setLastName(apellido_duenio_tarjeta_p);
+    setCardType(tipo_tarjeta_p);
 
     const updatedFormData = {
       ...formData,
@@ -176,7 +183,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,ha
               <input
                 name="tipo_tarjeta_p"
                 type="text"
-                value="MasterCard"
+                value={cardType}
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 disabled
               />
@@ -185,7 +192,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,ha
               <label className="leading-loose font-bold">Propietario</label>
               <input
                 name="nombre"
-                value="Christian Caro"
+                value={name +' '+lastName}
                 type="text"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                 disabled

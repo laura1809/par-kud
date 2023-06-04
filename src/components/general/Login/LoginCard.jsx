@@ -76,6 +76,7 @@ const LoginCard = () => {
 
   useEffect(() => {
     if (tokenCreated) {
+      
        window.location.href = "/Parkings";
     } else if (initialLoad) {
       showAlert(
