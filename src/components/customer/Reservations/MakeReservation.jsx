@@ -31,12 +31,16 @@ const MakeReservation = () => {
   };
 
   const reservationPetition = () => {
-    // console.log(formReserva);
     axios
-      .post('/cliente/reservar',formReserva)
+      .post("/cliente/reservar", formReserva)
       .then((res) => {
-        alert('Reserva hecha');
-        console.log("reserva hecha");
+        if (validarCVC()){
+          alert("Reserva registrada");
+          window.location.href = '/YourReservations';
+        }else {
+          alert("Hubo un error con tus datos");
+        }
+        
       })
       .catch((err) => console.log("error"));
   };
@@ -66,6 +70,23 @@ const MakeReservation = () => {
     div3.classList.add("pointer-events-none");
     div3.classList.add("bg-gray-300");
     div3.classList.add("opacity-50");
+
+    setFormReserva({
+      tipo_vehiculo_p: undefined,
+      marca_placa_vehiculo_p: "",
+      es_parq_cubierto_p: undefined,
+      ciudad_p: undefined,
+      nombre_sucursal_p: undefined,
+      direccion_sucursal_p: "",
+      fecha_reserva_p: "",
+      hora_reserva_p: "",
+      ultimos_cuatro_digitos_p: "",
+      tipo_tarjeta_p: "",
+      nombre_duenio_tarjeta_p: "",
+      apellido_duenio_tarjeta_p: "",
+      puntos_usados_p: 0,
+      tarifa: "",
+    });
   };
 
   return (

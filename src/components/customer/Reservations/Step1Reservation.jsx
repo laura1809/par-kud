@@ -4,7 +4,6 @@ const Step1Reservation = ({ enableDiv, formData, onFormChange }) => {
   
   const [vehicles, setVehicles] = useState([]);
   const vehiclesPetition =()=>{
-    // console.log(formData.tipo_vehiculo);
     axios
     .post('/cliente/vehiculos/tipo',{tipo_vehiculo_p:formData.tipo_vehiculo_p})
     .then((res) => {
