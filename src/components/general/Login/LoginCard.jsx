@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { showSuccessAlert,showErrorAlert} from "../../../services/alertsconfig";
+import {
+  showSuccessAlert,
+  showErrorAlert,
+} from "../../../services/alertsconfig";
 
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
@@ -31,7 +34,7 @@ const LoginCard = () => {
   const onChange = () => {
     captcha.current.getValue()
       ? setValidCaptcha(true)
-      : showErrorAlert('Error reCAPTCHA');
+      : showErrorAlert("Error reCAPTCHA");
   };
 
   const handleLogin = () => {
@@ -53,7 +56,7 @@ const LoginCard = () => {
         console.log(res.data);
       })
       .catch((err) => {
-        showErrorAlert('Por favor verifica los campos de entrada');
+        showErrorAlert("Por favor verifica los campos de entrada");
         console.log(err);
       });
   };
@@ -78,9 +81,14 @@ const LoginCard = () => {
 
   useEffect(() => {
     if (tokenCreated) {
-      showSuccessAlert('Bienvenido a PAR-KUD','/Parkings');
+      if (localStorage.getItem("rol") == "USER_ROLE") {
+        showSuccessAlert("Bienvenido a PAR-KUD", '/Parkings');
+      } else {
+        showSuccessAlert("Bienvenido a PAR-KUD", "/Statistics");
+      }
+      
     } else if (initialLoad) {
-      showErrorAlert('Error usuario, contraseña o reCAPTCHA incorrectos.');
+      showErrorAlert("Error usuario, contraseña o reCAPTCHA incorrectos.");
     }
   }, [tokenCreated]);
 

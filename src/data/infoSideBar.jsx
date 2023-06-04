@@ -1,18 +1,19 @@
 
 export const infoSideBar=[
+    
     {
         id: "button-parkings",
         name :"Parqueaderos",
         page:"/Parkings",
         icon :"faLocationDot",
-        profile:['USER_ROLE','admin_role','super_admin_role']
+        profile:['USER_ROLE','ADMIN_ROLE','SUPER_ADMIN_ROLE']
     },
     {
         id: "button-parkings",
-        name :"Sucursal",
+        name :"Tu sucursal",
         icon :"faLocationDot",
         page: "/Subsidiary",
-        profile :['admin_role','super_admin_role']
+        profile :['ADMIN_ROLE']
     },
     {
         id: "button-addCar",
@@ -20,6 +21,13 @@ export const infoSideBar=[
         icon :"faCarSide",
         page: "/AddVehicle",
         profile:['USER_ROLE']
+    },
+    {
+        id: "button-statistics",
+        name :"Estadísticas",
+        icon :"faChartLine",
+        page: "/Statistics",
+        profile:['ADMIN_ROLE','SUPER_ADMIN_ROLE']
     },
     {
         id: "button-makeReservation",
@@ -49,32 +57,26 @@ export const infoSideBar=[
         page: "/RegisterCard",
         profile:['USER_ROLE']
     },
-    {
-        id: "button-statistics",
-        name :"Estadísticas",
-        icon :"faChartLine",
-        page: "/Statistics",
-        profile:['admin_role','super_admin_role']
-    },
+   
     {
         id: "button-historial",
         name :"Historial",
         icon :"faAddressCard",
         page: "/Historial",
-        profile:['admin_role']
+        profile:['ADMIN_ROLE','SUPER_ADMIN_ROLE']
     },
     {
         id: "button-registerCustomer",
         name :"Registrar cliente",
         icon :"faUserPlus",
         page: "/RegisterCustomer",
-        profile:['admin_role']
+        profile:['ADMIN_ROLE']
     },
     {
         id: "button-logOut",
         name :"Cerrar sesión",
         icon :"faRightToBracket",
         page: "/",
-        profile :['USER_ROLE','admin_role','super_admin_role']
+        profile :['USER_ROLE','ADMIN_ROLE','SUPER_ADMIN_ROLE']
     }
 ]

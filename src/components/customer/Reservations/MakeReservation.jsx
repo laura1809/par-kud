@@ -36,8 +36,7 @@ const MakeReservation = () => {
     axios
       .post("/cliente/reservar", formReserva)
       .then((res) => {
-        console.log(validarCVC());
-        if (validarCVC){
+        if (validarCVC()){
           showSuccessAlert('Reserva registrada','/YourReservations')
         }else {
           showErrorAlert("Verifica tus datos.También tu CVC");
@@ -49,7 +48,6 @@ const MakeReservation = () => {
 
   const validarCVC = () => {
     let cvcRegex = /^[0-9]{3}$/;
-    console.log()
     return cvcRegex.test(formReserva.cvc);
   };
 
