@@ -3,6 +3,7 @@ import { useState } from "react";
 import Step1Reservation from "./Step1Reservation";
 import Step2Reservation from "./Step2Reservation";
 import Step3Reservation from "./Step3Reservation";
+import { showSuccessAlert,showErrorAlert} from "../../../services/alertsconfig";
 
 const MakeReservation = () => {
   const [step3, setStep3] = useState(false);
@@ -21,6 +22,7 @@ const MakeReservation = () => {
     apellido_duenio_tarjeta_p: "",
     puntos_usados_p: 0,
     tarifa: "",
+    cvc:""
   });
 
   const handleFormChange = (e) => {
@@ -34,20 +36,21 @@ const MakeReservation = () => {
     axios
       .post("/cliente/reservar", formReserva)
       .then((res) => {
-        if (validarCVC()){
-          alert("Reserva registrada");
-          window.location.href = '/YourReservations';
+        console.log(validarCVC());
+        if (validarCVC){
+          showSuccessAlert('Reserva registrada','/YourReservations')
         }else {
-          alert("Hubo un error con tus datos");
+          showErrorAlert("Verifica tus datos.También tu CVC");
         }
-        
+        console.log(res);
       })
-      .catch((err) => console.log("error"));
+      .catch((err) => console.log(err));
   };
 
   const validarCVC = () => {
     let cvcRegex = /^[0-9]{3}$/;
-    return cvcRegex.test(ultimos_cuatro_digitos_p);
+    console.log()
+    return cvcRegex.test(formReserva.cvc);
   };
 
   const enableDiv = (id) => () => {
@@ -61,33 +64,9 @@ const MakeReservation = () => {
   };
 
   const disableDiv = () => {
-    let div2 = document.getElementById("form2");
-    div2.classList.add("pointer-events-none");
-    div2.classList.add("bg-gray-300");
-    div2.classList.add("opacity-50");
-
-    let div3 = document.getElementById("form3");
-    div3.classList.add("pointer-events-none");
-    div3.classList.add("bg-gray-300");
-    div3.classList.add("opacity-50");
-
-    setFormReserva({
-      tipo_vehiculo_p: undefined,
-      marca_placa_vehiculo_p: "",
-      es_parq_cubierto_p: undefined,
-      ciudad_p: undefined,
-      nombre_sucursal_p: undefined,
-      direccion_sucursal_p: "",
-      fecha_reserva_p: "",
-      hora_reserva_p: "",
-      ultimos_cuatro_digitos_p: "",
-      tipo_tarjeta_p: "",
-      nombre_duenio_tarjeta_p: "",
-      apellido_duenio_tarjeta_p: "",
-      puntos_usados_p: 0,
-      tarifa: "",
-    });
-  };
+    showSuccessAlert('Registro de reserva cancelado','/MakeReservation')
+    };
+  
 
   return (
     <>
@@ -100,6 +79,7 @@ const MakeReservation = () => {
         <Step2Reservation
           enableDiv={enableDiv}
           formData={formReserva}
+          setForm={setFormReserva}
           onFormChange={handleFormChange}
         />
       </div>

@@ -202,7 +202,7 @@ const Step3Reservation = ({ disableDiv, formData, onFormChange, valid,setForm,ha
               <label className="leading-loose font-bold ">CVC</label>
               <div className="flex">
                 <input
-                  name="ultimos_cuadro_digitos"
+                  name="cvc"
                   type="text"
                   className="px-2 py-2 border focus:ring-gray-500 focus:border-gray-900 w-20 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                   placeholder="3 dígitos"

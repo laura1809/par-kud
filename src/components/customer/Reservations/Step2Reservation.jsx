@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "../../../services/axiosconfig";
 
-const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
+const Step2Reservation = ({ enableDiv, formData, setForm,onFormChange }) => {
   
   const [info, setInfo] = useState([]);
 
@@ -16,10 +16,9 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
       formData.nombre_sucursal_p === undefined ? null : formData.nombre_sucursal_p,
   };
 
-  // Paso 1: Obtener todas las ciudades
+
   const ciudades = info.map((objeto) => objeto["Ciudad"]);
 
-  // Paso 2: Filtrar solo los valores únicos
   const ciudadesUnicas = ciudades.filter(
     (ciudad, index) => ciudades.indexOf(ciudad) === index
   );
@@ -30,7 +29,6 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
       .post("/cliente/sucursales", body)
       .then((res) => {
         setInfo(res.data);
-        // console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -38,9 +36,15 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
   };
 
   useEffect(() => {
-    parkingsPetition();
-  }, [formData.ciudad_p, formData.nombre_sucursal_p, formData.es_parq_cubierto_p]);
+      setInfo([])
+      parkingsPetition();
+  }, [formData.ciudad_p, formData.nombre_sucursal_p, formData.es_parq_cubierto_p || undefined]);
 
+  const cleanFilters = () => {
+    setForm({ ...formData, es_parq_cubierto_p: "", ciudad_p:undefined , nombre_sucursal_p: undefined });
+    parkingsPetition();
+     };
+  
   return (
     <div
       id="form2"
@@ -90,7 +94,7 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                       onChange={onFormChange}
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     >
-                      <option value="">Selecciona una ciudad</option>
+                      <option value={undefined}>Selecciona una ciudad</option>
                       {ciudadesUnicas.map((item, index) => {
                         return (
                           <option key={index} value={item}>
@@ -135,7 +139,7 @@ const Step2Reservation = ({ enableDiv, formData, onFormChange }) => {
                 </div>
               </div>
               <div className="pt-4 flex items-center space-x-4">
-                <button className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
+                <button onClick={cleanFilters} className="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none hover:bg-red hover:text-white">
                   <svg
                     className="w-6 h-6 mr-3"
                     fill="none"
