@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from '../../../services/axiosconfig'
+import { showSuccessAlert,showErrorAlert} from "../../../services/alertsconfig";
+import axios from "../../../services/axiosconfig";
 
 const RegisterVehicles = () => {
-  
   const [dataMarkings, setDataMarkings] = useState([]);
   const [formData, setFormData] = useState({
     tipo_vehiculo_p: "",
@@ -12,7 +12,7 @@ const RegisterVehicles = () => {
     apellido_1_p: "",
     apellido_2_p: "",
     marca_vehiculo_p: "",
-    color_vehiculo_p: ""
+    color_vehiculo_p: "",
   });
 
   const getVehicleMarkings = () => {
@@ -35,42 +35,27 @@ const RegisterVehicles = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    axios
+    const requiredFields = ['tipo_vehiculo_p', 'placa_p', 'nombre_1_p', 'apellido_1_p','apellido_2_p','marca_vehiculo_p', 'color_vehiculo_p'];
+    const isAllFilled = requiredFields.every((field) => formData[field].trim() !== '');
+    if(isAllFilled){
+      axios
       .post("/cliente/registro/vehiculo", formData)
       .then((response) => {
-        alert("Vehículo registrado con éxito");
+        showSuccessAlert("Vehículo registrado con éxito", "/AddVehicle");
         console.log(response.data);
       })
       .catch((error) => {
-        alert("Hubo un error con el registro del vehículo");
+        showErrorAlert("Hubo un error con el registro del vehículo");
         console.error(error);
       });
-
-    setFormData({
-      placa_vehiculo: "",
-      nombre1_propietario: "",
-      nombre2_propietario: "",
-      apellido1_propietario: "",
-      apellido2_propietario: "",
-      tipo_vehiculo: "",
-      color_vehiculo: "",
-      k_marca_vehiculo: "",
-    });
+    } else {
+      showErrorAlert("Completa los campos");
+    }
+    
   };
 
   const handleCancel = () => {
-    alert("Registro de vehículo cancelado");
-    setFormData({
-      tipo_vehiculo_p: "",
-      placa_p: "",
-      nombre_1_p: "",
-      nombre_2_p: "",
-      apellido_1_p: "",
-      apellido_2_p: "",
-      marca_vehiculo_p: "",
-      color_vehiculo_p: ""
-    });
+    showSuccessAlert("Registro de vehículo cancelado", "/AddVehicle");
   };
 
   useEffect(() => {

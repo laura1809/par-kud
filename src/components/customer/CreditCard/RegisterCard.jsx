@@ -1,14 +1,9 @@
 import { useState } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import axios from '../../../services/axiosconfig'
+import { showSuccessAlert,showErrorAlert} from "../../../services/alertsconfig";
+import axios from "../../../services/axiosconfig";
 
-const MySwal = withReactContent(Swal);
 
 const RegisterCard = () => {
-
-  
-
   const [primerNombre, setPrimerNombre] = useState("");
   const [primerApellido, setPrimerApellido] = useState("");
   const [tarjeta, setTarjeta] = useState("");
@@ -90,52 +85,31 @@ const RegisterCard = () => {
           ultimos_cuatro_digitos_p: digitos,
           mes_vencimiento_p: parseInt(mes),
           anio_vencimiento_p: parseInt(anio),
-          tipo_tarjeta_p:tipoTarjeta
+          tipo_tarjeta_p: tipoTarjeta,
         };
-        console.log(objectData);
 
         axios
           .post("/cliente/registro/tarjeta", objectData)
           .then((response) => {
-            console.log(response.data);
-            MySwal.fire({
-              title: <strong>Listo</strong>,
-              html: <i>Tarjeta Registrada</i>,
-              icon: "success",
-            });
+            showSuccessAlert('Tarjeta Registrada','/RegisterCard');
             // Realizar cualquier otra acción con la respuesta del servidor
+            console.log(response.data);
           })
           .catch((error) => {
-            console.error(error);
-            MySwal.fire({
-              title: <strong>Error</strong>,
-              html: <i>Registro No Completado</i>,
-              icon: "error",
-            });
+            showErrorAlert('Registro No Completado')
             // Manejar cualquier error que ocurra durante la petición
+            console.error(error);
           });
       } else {
-        MySwal.fire({
-          title: <strong>Error</strong>,
-          html: <i>Número de tarjeta no válido</i>,
-          icon: "error",
-        });
+        showErrorAlert('Número de tarjeta no válido');
       }
     } else {
-      MySwal.fire({
-        title: <strong>Error</strong>,
-        html: <i>Debe rellenar todos lo campos</i>,
-        icon: "error",
-      });
+      showErrorAlert('Debe rellenar todos lo campos');
     }
   };
 
   const handleCancel = () => {
-    setPrimerNombre("");
-    setPrimerApellido("");
-    setTarjeta("");
-    setMes("");
-    setAnio("");
+    showSuccessAlert('Registro de tarjeta cancelado','/RegisterCard');
   };
   return (
     <>

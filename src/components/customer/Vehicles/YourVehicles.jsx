@@ -27,7 +27,7 @@ const YourVehicles = () => {
   const filter = (word) => {
     let resultSearch = vehicleTable.filter((element) => {
       if (
-        element["Placa vehículo"].toLowerCase().includes(word.toLowerCase())
+        element["Placa"].toUpperCase().includes(word.toUpperCase())
       ) {
         return element;
       }
@@ -49,7 +49,7 @@ const YourVehicles = () => {
         <div className="relative overflow-x-auto">
           <div className="p-4">
             <label htmlFor="table-search" className="sr-only">
-              Buscar vehículo
+              Buscar vehículo por placa
             </label>
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
