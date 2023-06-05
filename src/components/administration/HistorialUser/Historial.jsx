@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { TableBasic } from "./Table";
 import axios from "../../../services/axiosconfig";
 

@@ -9,7 +9,7 @@ export const infoSideBar=[
         profile:['USER_ROLE','ADMIN_ROLE','SUPER_ADMIN_ROLE']
     },
     {
-        id: "button-parkings",
+        id: "button-yourParking",
         name :"Tu sucursal",
         icon :"faLocationDot",
         page: "/Subsidiary",

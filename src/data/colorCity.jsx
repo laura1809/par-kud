@@ -12,7 +12,7 @@ export const colorCity=[
         color:'bg-ligth-blue'
     },
     {
-        city:'Cartagena',
+        city:'Bucaramanga',
         color:'bg-purple'
     },
     {
